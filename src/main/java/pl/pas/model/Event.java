@@ -13,16 +13,16 @@ public class Event extends Entity {
     private Date returnDate;
 
 
-    public Event(UUID id, Device device, Client client, Date borrowDate) {
-        super(id);
+    public Event( Device device, Client client ) {
+        super();
         this.device = device;
         this.client = client;
         this.borrowDate = new Date();
         this.returnDate = null;
     }
 
-    public Event(UUID id, Device device, Client client, Date borrowDate, Date returnDate) {
-        super(id);
+    public Event( Device device, Client client, Date borrowDate) {
+        super();
         this.device = device;
         this.client = client;
         this.borrowDate = borrowDate;

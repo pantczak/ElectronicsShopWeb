@@ -1,6 +1,5 @@
 package pl.pas.repositories;
 
-import pl.pas.model.Entity;
 import pl.pas.model.user.Administrator;
 import pl.pas.model.user.Client;
 import pl.pas.model.user.User;
