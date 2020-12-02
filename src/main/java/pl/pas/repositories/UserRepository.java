@@ -2,6 +2,7 @@ package pl.pas.repositories;
 
 import pl.pas.model.user.Administrator;
 import pl.pas.model.user.Client;
+import pl.pas.model.user.Employee;
 import pl.pas.model.user.User;
 import pl.pas.repositories.interfaces.IUserRepository;
 
@@ -20,6 +21,7 @@ public class UserRepository implements IUserRepository {
     public boolean addUser(User user) {
         synchronized (users){
             if (users.contains(getUser(user.getLogin()))) return false;
+            user.setId(UUID.randomUUID());
             return users.add(user);
         }
     }
@@ -37,10 +39,7 @@ public class UserRepository implements IUserRepository {
     @Override
     public User getUser(String login) {
         synchronized (users) {
-            for (User u: users) {
-                if (u.getLogin().equals(login)) return u;
-            }
-            return null;
+            return users.stream().filter(u -> u.getLogin().equals(login)).findFirst().orElse(null);
         }
     }
 
@@ -78,7 +77,15 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public List<User> getAllEmployees() {
-        return null;
+        synchronized (users) {
+            ArrayList<User> employees = new ArrayList<>();
+            for (User user : users) {
+                if (user instanceof Employee) {
+                    employees.add(user);
+                }
+            }
+            return employees;
+        }
     }
 
     @Override

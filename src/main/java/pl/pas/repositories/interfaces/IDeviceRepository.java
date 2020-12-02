@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.UUID;
 
 public interface IDeviceRepository {
-    boolean addDevice(Device resource);
+    boolean addDevice(Device device);
     Device getDevice(UUID uuid);
     List<Device> getAllDevices();
     void updateDevice(UUID uuid, Device newDevice);
-    boolean deleteDevice(long uuid);
+    boolean deleteDevice(UUID uuid);
     List<Laptop> getAllLaptops();
     List<Smartphone> getAllSmartphones();
 }

@@ -18,37 +18,71 @@ public class DeviceRepository implements IDeviceRepository {
     }
 
     @Override
-    public boolean addDevice(Device resource) {
-        return false;
+    public boolean addDevice(Device device) {
+        synchronized (devices) {
+            device.setId(UUID.randomUUID());
+            return devices.add(device);
+        }
     }
 
     @Override
     public Device getDevice(UUID uuid) {
-        return null;
+        synchronized (devices) {
+            return devices.stream().filter(d -> d.getId() == uuid).findFirst().orElse(null);
+        }
     }
+
 
     @Override
     public List<Device> getAllDevices() {
-        return null;
+        synchronized (devices) {
+            return new ArrayList<>(devices);
+        }
+
     }
 
     @Override
     public void updateDevice(UUID uuid, Device newDevice) {
-
+        synchronized (devices) {
+            for (Device r : devices) {
+                if (r.getId() == uuid) {
+                    newDevice.setId(uuid);
+                    devices.set(devices.indexOf(r), newDevice);
+                }
+            }
+        }
     }
 
     @Override
-    public boolean deleteDevice(long uuid) {
-        return false;
+    public boolean deleteDevice(UUID uuid) {
+        synchronized (devices) {
+            return devices.remove(getDevice(uuid));
+        }
     }
 
     @Override
     public List<Laptop> getAllLaptops() {
-        return null;
+        synchronized (devices) {
+            List<Laptop> laptops = new ArrayList<>();
+            for (Device d : devices) {
+                if (d instanceof Laptop) {
+                    laptops.add((Laptop) d);
+                }
+            }
+            return laptops;
+        }
     }
 
     @Override
     public List<Smartphone> getAllSmartphones() {
-        return null;
+        synchronized (devices) {
+            List<Smartphone> smartphones = new ArrayList<>();
+            for (Device d : devices) {
+                if (d instanceof Smartphone) {
+                    smartphones.add((Smartphone) d);
+                }
+            }
+            return smartphones;
+        }
     }
 }

@@ -14,7 +14,7 @@ public abstract class Entity {
     }
 
     public Entity() {
-        this.id = UUID.randomUUID();
+        this.id = null;
     }
 
     @Override

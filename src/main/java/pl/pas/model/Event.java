@@ -29,10 +29,6 @@ public class Event extends Entity {
         this.returnDate = null;
     }
 
-    public void ReturnDevice(){
-        this.borrowDate = new Date();
-    }
-
     public Device getDevice() {
         return device;
     }
