@@ -3,25 +3,25 @@ package pl.pas.model.resource;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class Smartphone extends Device {
-    private int batteryInMah;
+    private double batteryLifetime;
 
-    public Smartphone(String brand, String model, int weightInGrams, int batteryInMah) {
+    public Smartphone(String brand, String model, int weightInGrams, double batteryLifetime) {
         super(brand, model, weightInGrams);
-        this.batteryInMah = batteryInMah;
+        this.batteryLifetime = batteryLifetime;
     }
 
-    public int getBatteryInMah() {
-        return batteryInMah;
+    public double getBatteryLifetime() {
+        return batteryLifetime;
     }
 
-    public void setBatteryInMah(int batteryInMah) {
-        this.batteryInMah = batteryInMah;
+    public void setBatteryLifetime(int batteryLifetime) {
+        this.batteryLifetime = batteryLifetime;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .append("batteryInMah", batteryInMah)
+                .append("batteryLifetime", batteryLifetime)
                 .toString();
     }
 }

@@ -1,5 +1,9 @@
 package pl.pas.managers;
 
+import pl.pas.model.user.Administrator;
+import pl.pas.model.user.Client;
+import pl.pas.model.user.Employee;
+import pl.pas.model.user.User;
 import pl.pas.repositories.interfaces.IDeviceRepository;
 import pl.pas.repositories.interfaces.IEventRepository;
 import pl.pas.repositories.interfaces.IUserRepository;
@@ -7,6 +11,8 @@ import pl.pas.repositories.interfaces.IUserRepository;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.List;
+import java.util.UUID;
 
 @Named
 @ApplicationScoped
@@ -27,4 +33,97 @@ public class UserManager {
         this.userRepository = userRepository;
     }
 
+    public boolean addClient(String login, String name, String lastName, int age) {
+        if (login == null || name == null || lastName == null || age < 0) {
+            return false;
+        }
+        return userRepository.addUser(new Client(name, lastName, login, age));
+    }
+
+    public boolean addEmployee(String login, String name, String lastName) {
+        if (login == null || name == null || lastName == null) {
+            return false;
+        }
+        return userRepository.addUser(new Employee(name, lastName, login));
+    }
+
+    public boolean addAdministartor(String login, String name, String lastName) {
+        if (login == null || name == null || lastName == null) {
+            return false;
+        }
+        return userRepository.addUser(new Administrator(name, lastName, login));
+    }
+
+    public User getUser(UUID uuid) {
+        return userRepository.getUser(uuid);
+    }
+
+    public User getUser(String login) {
+        if (login == null) {
+            return null;
+        }
+        return userRepository.getUser(login);
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.getAllUsers();
+    }
+
+    public void updateUser(UUID uuid, User newUser) {
+        userRepository.updateUser(uuid, newUser);
+    }
+
+    public List<Client> getAllClients() {
+        return userRepository.getAllClients();
+    }
+
+    public List<User> getAllEmployees() {
+        return userRepository.getAllEmployees();
+    }
+
+    public List<User> getAllAdministrators() {
+        return userRepository.getAllAdministrators();
+    }
+
+    public List<User> getAllActiveUsers() {
+        return userRepository.getAllActiveUsers();
+    }
+
+    private boolean updateUser(User old, String login, String name, String lastName) {
+        if (old == null || userRepository.getUser(old.getId()) == null
+                || login == null || name == null || lastName == null) {
+            return false;
+        }
+        if (old instanceof Employee) {
+            userRepository.updateUser(old.getId(), new Employee(name, lastName, login));
+        } else if (old instanceof Administrator) {
+            userRepository.updateUser(old.getId(), new Administrator(name, lastName, login));
+        }
+        return true;
+    }
+
+    private boolean updateClient(User old, String login, String name, String lastName, int age) {
+        if (old == null || userRepository.getUser(old.getId()) == null
+                || login == null || name == null || lastName == null || age > 0 || !(old instanceof Client)) {
+            return false;
+        }
+        userRepository.updateUser(old.getId(), new Client(name, lastName, login, age));
+        return true;
+    }
+
+    public boolean activateUser(User user){
+        if (user == null){
+            return false;
+        }
+        user.setActive(true);
+        return true;
+    }
+
+    public boolean deactivateUser(User user) {
+        if (user == null) {
+            return false;
+        }
+        user.setActive(false);
+        return true;
+    }
 }

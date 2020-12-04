@@ -33,6 +33,10 @@ public class Event extends Entity {
         return device;
     }
 
+    public void setDevice(Device device) {
+        this.device = device;
+    }
+
     public Client getClient() {
         return client;
     }
