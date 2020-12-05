@@ -5,11 +5,12 @@ import pl.pas.model.resource.Laptop;
 import pl.pas.model.resource.Smartphone;
 import pl.pas.repositories.interfaces.IDeviceRepository;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class DeviceRepository implements IDeviceRepository {
+public class DeviceRepository implements IDeviceRepository, Serializable {
 
     private final List<Device> devices;
 

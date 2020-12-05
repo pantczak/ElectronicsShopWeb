@@ -1,0 +1,40 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:define name="header">
+        <h1>#{text['page.header.main_menu']}</h1>
+    </ui:define>
+
+    <ui:define name="menu">
+        #{text['page.menu']}
+    </ui:define>
+
+    <ui:define name="view">
+        <div class="flexbox_menu">
+            <div class="flexbox-item">
+                <h:link outcome="users">#{text['page.view.users']}</h:link>
+            </div>
+            <div class="flexbox-item">
+                <h:link outcome="devices">#{text['page.view.devices']}</h:link>
+            </div>
+            <div class="flexbox-item">
+                <h:link outcome="events">#{text['page.view.events']}</h:link>
+            </div>
+            <div class="flexbox-item">
+                <h:link outcome="addUser">#{text['page.view.addUser']}</h:link>
+            </div>
+            <div class="flexbox-item">
+                <h:link outcome="addDevice">#{text['page.view.addDevice']}</h:link>
+            </div>
+            <div class="flexbox-item">
+                <h:link outcome="addEvent">#{text['page.view.addEvent']}</h:link>
+            </div>
+        </div>
+    </ui:define>
+
+    <ui:define name="content">
+        Welcome to the application!
+    </ui:define>
+</ui:composition>

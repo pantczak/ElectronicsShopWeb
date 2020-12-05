@@ -12,6 +12,11 @@ public class Client extends User {
         this.age = age;
     }
 
+    public Client() {
+        super();
+        age = 0;
+    }
+
     public int getAge() {
         return age;
     }

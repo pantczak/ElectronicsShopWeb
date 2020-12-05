@@ -3,12 +3,13 @@ package pl.pas.repositories;
 import pl.pas.model.Event;
 import pl.pas.repositories.interfaces.IEventRepository;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-public class EventRepository implements IEventRepository {
+public class EventRepository implements IEventRepository, Serializable {
     private final List<Event> events;
 
     public EventRepository() {

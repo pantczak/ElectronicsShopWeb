@@ -7,6 +7,10 @@ public class Employee extends User {
         super(name, lastName, login);
     }
 
+    public Employee() {
+        super();
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)

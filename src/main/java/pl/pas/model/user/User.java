@@ -19,6 +19,19 @@ public abstract class User extends Entity {
         this.login = login;
     }
 
+    public User() {
+        super();
+        login = "";
+        isActive = true;
+        lastName = "";
+        name = "";
+    }
+
+    @Override
+    public UUID getId() {
+        return super.getId();
+    }
+
     public String getName() {
         return name;
     }
@@ -60,4 +73,5 @@ public abstract class User extends Entity {
                 .append("login", login)
                 .toString();
     }
+
 }

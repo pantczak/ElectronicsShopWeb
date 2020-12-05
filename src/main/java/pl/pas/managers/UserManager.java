@@ -11,12 +11,13 @@ import pl.pas.repositories.interfaces.IUserRepository;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
 @Named
 @ApplicationScoped
-public class UserManager {
+public class UserManager implements Serializable {
     @Inject
     private IDeviceRepository deviceRepository;
     @Inject
@@ -47,7 +48,7 @@ public class UserManager {
         return userRepository.addUser(new Employee(name, lastName, login));
     }
 
-    public boolean addAdministartor(String login, String name, String lastName) {
+    public boolean addAdministrator(String login, String name, String lastName) {
         if (login == null || name == null || lastName == null) {
             return false;
         }
@@ -89,7 +90,7 @@ public class UserManager {
         return userRepository.getAllActiveUsers();
     }
 
-    private boolean updateUser(User old, String login, String name, String lastName) {
+    public boolean updateUser(User old, String login, String name, String lastName) {
         if (old == null || userRepository.getUser(old.getId()) == null
                 || login == null || name == null || lastName == null) {
             return false;
@@ -102,7 +103,7 @@ public class UserManager {
         return true;
     }
 
-    private boolean updateClient(User old, String login, String name, String lastName, int age) {
+    public boolean updateClient(User old, String login, String name, String lastName, int age) {
         if (old == null || userRepository.getUser(old.getId()) == null
                 || login == null || name == null || lastName == null || age > 0 || !(old instanceof Client)) {
             return false;
@@ -126,4 +127,5 @@ public class UserManager {
         user.setActive(false);
         return true;
     }
+
 }

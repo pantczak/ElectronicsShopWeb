@@ -1,0 +1,158 @@
+<ui:composition template="WEB-INF/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="header">
+        <h1>Navigate</h1>
+    </ui:define>
+
+    <ui:define name="menu">
+        <h:form>
+            <h:commandButton action="main"  value="Back"/>
+        </h:form>
+    </ui:define>
+
+    <ui:define name="view">
+
+    <h:form>
+        ID:
+        <h:inputText value="#{userController.userId}"/>
+        <h:commandButton value="Search" action="#{userController.searchId(userController.userId)}"/>
+    </h:form>
+
+    <h:form>
+        Login:
+        <h:inputText value="#{userController.login}"/>
+        <h:commandButton value="Search" action="#{userController.searchLogin(userController.login)}"/>
+    </h:form>
+
+        <br/>
+        <h1>Administrators</h1>
+        <h:dataTable value="#{userController.userManager.allAdministrators}" var="user"
+                     styleClass="table"
+                     rowClasses="table-row"
+                     headerClass="table-header-users">
+
+            <h:column>
+                <f:facet name="header">User Id</f:facet>
+                #{user.Id}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Login</f:facet>
+                #{user.login}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Name</f:facet>
+                #{user.name}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Last Name</f:facet>
+                #{user.lastName}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Active</f:facet>
+                #{user.active}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Actions</f:facet>
+                <h:form>
+                    <h:commandButton value="Set Active Status" action="#{userController.changeActivity(user)}"/>
+                    <h:commandButton value="Show" action="#{userController.searchId(user.Id)}"/>
+                    <h:commandButton value="Edit" action="#{userController.searchId(user.Id)}"/>
+                </h:form>
+            </h:column>
+
+        </h:dataTable>
+
+        <br/>
+        <h1>Employees</h1>
+        <h:dataTable value="#{userController.userManager.allEmployees}" var="user"
+                     styleClass="table"
+                     rowClasses="table-row"
+                     headerClass="table-header-users">
+            <h:column>
+                <f:facet name="header">User Id</f:facet>
+                #{user.Id}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Login</f:facet>
+                #{user.login}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Name</f:facet>
+                #{user.name}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Last Name</f:facet>
+                #{user.lastName}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Active</f:facet>
+                #{user.active}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Actions</f:facet>
+                <h:form>
+                    <h:commandButton value="Set Active Status" action="#{userController.changeActivity(user)}"/>
+                    <h:commandButton value="Show" action="#{userController.searchId(user.Id)}"/>
+                    <h:commandButton value="Edit" action="#{userController.searchId(user.Id)}"/>
+                </h:form>
+            </h:column>
+
+        </h:dataTable>
+
+        <br/>
+        <h1>Clients</h1>
+        <h:dataTable value="#{userController.userManager.allClients}" var="client"
+                     styleClass="table"
+                     rowClasses="table-row"
+                     headerClass="table-header-users">
+            <h:column>
+                <f:facet name="header">User Id</f:facet>
+                <h:outputFormat value="#{client.Id}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Login</f:facet>
+                #{client.login}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Name</f:facet>
+                #{client.name}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Last Name</f:facet>
+                #{client.lastName}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Active</f:facet>
+                #{client.active}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Actions</f:facet>
+                <h:form>
+                    <h:commandButton value="Set Active Status" action="#{userController.changeActivity(client)}"/>
+                    <h:commandButton action="#{userController.viewClient(client)}" value="Show"/>
+                    <h:commandButton value="Edit" action="#{userController.searchId(client.Id)}"/>
+                </h:form>
+            </h:column>
+
+        </h:dataTable>
+
+    </ui:define>
+</ui:composition>

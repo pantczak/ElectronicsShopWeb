@@ -11,13 +11,14 @@ import pl.pas.repositories.interfaces.IUserRepository;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 @Named
 @ApplicationScoped
-public class EventManager {
+public class EventManager implements Serializable {
     @Inject
     private IDeviceRepository deviceRepository;
     @Inject

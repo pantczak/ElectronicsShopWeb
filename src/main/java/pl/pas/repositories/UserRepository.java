@@ -6,11 +6,12 @@ import pl.pas.model.user.Employee;
 import pl.pas.model.user.User;
 import pl.pas.repositories.interfaces.IUserRepository;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class UserRepository implements IUserRepository {
+public class UserRepository implements IUserRepository, Serializable {
     private final List<User> users;
 
     public UserRepository() {
