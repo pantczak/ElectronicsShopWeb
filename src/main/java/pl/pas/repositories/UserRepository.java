@@ -22,7 +22,7 @@ public class UserRepository implements IUserRepository, Serializable {
     public boolean addUser(User user) {
         synchronized (users){
             if (users.contains(getUser(user.getLogin()))) return false;
-            user.setId(UUID.randomUUID());
+            user.setUuid(UUID.randomUUID());
             return users.add(user);
         }
     }
@@ -31,7 +31,7 @@ public class UserRepository implements IUserRepository, Serializable {
     public User getUser(UUID uuid) {
         synchronized (users) {
             for (User u: users) {
-                if (u.getId() == uuid) return u;
+                if (u.getUuid() == uuid) return u;
             }
             return null;
         }
@@ -55,8 +55,8 @@ public class UserRepository implements IUserRepository, Serializable {
     public void updateUser(UUID uuid, User newUser) {
         synchronized (users) {
             for (User u : users) {
-                if (u.getId() == uuid) {
-                    newUser.setId(uuid);
+                if (u.getUuid() == uuid) {
+                    newUser.setUuid(uuid);
                     users.set(users.indexOf(u), newUser);
                 }
             }

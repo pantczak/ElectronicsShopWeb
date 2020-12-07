@@ -9,16 +9,43 @@
             <default-locale>en</default-locale>
             <supported-locale>pl</supported-locale>
         </locale-config>
-        <resource-bundle>
-            <base-name>prompts</base-name>
-            <var>text</var>
-        </resource-bundle>
     </application>
     <navigation-rule>
         <from-view-id/>
         <navigation-case>
             <from-outcome>main</from-outcome>
             <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>addUser</from-outcome>
+            <to-view-id>/adduser.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>users</from-outcome>
+            <to-view-id>/users.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>user</from-outcome>
+            <to-view-id>/user.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>client</from-outcome>
+            <to-view-id>/client.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>events</from-outcome>
+            <to-view-id>/events.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>addEvent</from-outcome>
+            <to-view-id>/addevent.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
     </navigation-rule>
 

@@ -19,7 +19,7 @@ public class EventRepository implements IEventRepository, Serializable {
     @Override
     public boolean addEvent(Event event) {
         synchronized (events) {
-            event.setId(UUID.randomUUID());
+            event.setUuid(UUID.randomUUID());
             return events.add(event);
         }
     }
@@ -27,7 +27,7 @@ public class EventRepository implements IEventRepository, Serializable {
     @Override
     public Event getEvent(UUID uuid) {
         synchronized (events) {
-            return events.stream().filter(e -> e.getId() == uuid).findFirst().orElse(null);
+            return events.stream().filter(e -> e.getUuid() == uuid).findFirst().orElse(null);
         }
     }
 
@@ -36,7 +36,7 @@ public class EventRepository implements IEventRepository, Serializable {
         List<Event> userEvents = new ArrayList<>();
         synchronized (events) {
             for (Event e : events) {
-                if (e.getClient().getId() == uuid) {
+                if (e.getClient().getUuid() == uuid) {
                     userEvents.add(e);
                 }
             }
@@ -50,7 +50,7 @@ public class EventRepository implements IEventRepository, Serializable {
         List<Event> deviceEvents = new ArrayList<>();
         synchronized (events) {
             for (Event e : events) {
-                if (e.getDevice().getId() == uuid) {
+                if (e.getDevice().getUuid() == uuid) {
                     deviceEvents.add(e);
                 }
             }
@@ -69,8 +69,8 @@ public class EventRepository implements IEventRepository, Serializable {
     public void updateEvent(UUID uuid, Event newEvent) {
         synchronized (events) {
             for (Event e : events) {
-                if (e.getId() == uuid) {
-                    newEvent.setId(uuid);
+                if (e.getUuid() == uuid) {
+                    newEvent.setUuid(uuid);
                     events.set(events.indexOf(e), newEvent);
                 }
             }

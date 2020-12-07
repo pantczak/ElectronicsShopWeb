@@ -29,8 +29,40 @@ public class UserController implements Serializable {
     private UUID userId;
     private String login;
 
+    public Client getNewClient() {
+        return newClient;
+    }
+
+    public Employee getNewEmployee() {
+        return newEmployee;
+    }
+
+    public void setNewClient(Client newClient) {
+        this.newClient = newClient;
+    }
+
+    public void setNewEmployee(Employee newEmployee) {
+        this.newEmployee = newEmployee;
+    }
+
+    public void setNewAdministrator(Administrator newAdministrator) {
+        this.newAdministrator = newAdministrator;
+    }
+
+    public Administrator getNewAdministrator() {
+        return newAdministrator;
+    }
+
     public Client getCurrentClient() {
         return currentClient;
+    }
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
     }
 
     public void setCurrentClient(Client currentClient) {
@@ -61,14 +93,12 @@ public class UserController implements Serializable {
         this.userManager = userManager;
     }
 
-    public UserController(Client newClient, Employee newEmployee, Administrator newAdministrator) {
-        this.newClient = newClient;
-        this.newEmployee = newEmployee;
-        this.newAdministrator = newAdministrator;
+    public UserController() {
+        this.newClient = new Client();
+        this.newEmployee = new Employee();
+        this.newAdministrator = new Administrator();
     }
 
-    public UserController() {
-    }
 
     public String viewClient(Client client) {
         setCurrentClient(client);

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: pantczak
+  Date: 12/7/20
+  Time: 9:59 AM
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+    <title>User</title>
+</h:head>
+
+<h:body>
+    <h1>User</h1>
+    <br/>
+
+    <h:dataTable value="#{userController.currentUser}">
+        <h:column>
+            <f:facet name="header">User Id</f:facet>
+            #{userController.currentUser.uuid}
+        </h:column>
+
+    <h:column>
+        <f:facet name="header">Login</f:facet>
+        #{userController.currentUser.login}
+    </h:column>
+
+    <h:column>
+        <f:facet name="header">Name</f:facet>
+        #{userController.currentUser.name}
+    </h:column>
+
+    <h:column>
+        <f:facet name="header">Last Name</f:facet>
+        #{userController.currentUser.lastName}
+    </h:column>
+
+    <h:column>
+        <f:facet name="header">Active</f:facet>
+        #{userController.currentUser.active}
+    </h:column>
+
+    </h:dataTable>
+
+    <br/>
+    Edit User's data:
+    <br/>
+
+    <h:form>
+        <h:dataTable value="#{userController.currentUser}">
+
+            <h:column>
+                <f:facet name="header">Name*</f:facet>
+                <h:inputText id="User_name" value="#{userController.currentUser.name}" >
+                    <f:validateRequired for="User_name" />
+                </h:inputText>
+                <h:message for="User_name" style="color: darkmagenta"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Last Name*</f:facet>
+                <h:inputText id="User_last_name" value="#{userController.currentUser.lastName}">
+                    <f:validateRequired for="User_last_name" />
+                </h:inputText>
+                <h:message for="User_last_name" style="color: darkmagenta" />
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Actions</f:facet>
+                <h:commandButton value="Update" action="#{userController.updateUser}"/>
+            </h:column>
+        </h:dataTable>
+
+    </h:form>
+
+    <br/>
+    <br/>
+
+    <h:form>
+        <h:commandButton action="users"  value="Back"/>
+    </h:form>
+</h:body>
+
+</html>

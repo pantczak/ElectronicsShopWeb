@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+    <title>Add User</title>
+</h:head>
+
+<h:body>
+    <h1>AddUser</h1>
+    <br/>
+
+    <h:form>
+        *Login:
+        <h:inputText id="Client_login" required="true" value="#{userController.newClient.login}">
+            <f:validateRequired for="Client_login" />
+        </h:inputText>
+        <h:message for="Client_login" style="color:darkmagenta" />
+        <br/>
+        *Name:
+        <h:inputText id="Client_name" required="true" value="#{userController.newClient.name}">
+            <f:validateRequired for="Client_name" />
+        </h:inputText>
+        <h:message for="Client_name" style="color:darkmagenta" />
+        <br/>
+        *Last Name:
+        <h:inputText id="Client_lastname" required="true" value="#{userController.newClient.lastName}">
+            <f:validateRequired for="Client_lastname" />
+        </h:inputText>
+        <h:message for="Client_lastname" style="color:darkmagenta" />
+        <br/>
+        *Age:
+        <h:inputText id="Client_age" required="true" value="#{userController.newClient.age}">
+            <f:validateRequired for="Client_age" />
+            <f:validateLongRange for="Client_age" minimum="1" maximum="140"/>
+        </h:inputText>
+        <h:message for="Client_age" style="color:darkmagenta" />
+        <br/>
+        <h:commandButton value="OK" action="#{userController.processNewClient()}" />
+        <h:commandButton value="Cancel" immediate="true" action="#{userController.cancelNewClient()}" /><br/>
+    </h:form>
+    <br/>
+    <br/>
+
+    Add Employee
+    <h:form>
+        *Login:
+        <h:inputText id="Employee_login" required="true" value="#{userController.newEmployee.login}">
+            <f:validateRequired for="Employee_login" />
+        </h:inputText>
+        <h:message for="Employee_login" style="color:darkmagenta" />
+        <br/>
+        *Name:
+        <h:inputText id="Employee_name" required="true" value="#{userController.newEmployee.name}">
+            <f:validateRequired for="Employee_name" />
+        </h:inputText>
+        <h:message for="Employee_name" style="color: darkmagenta" />
+        <br/>
+        *Last Name:
+        <h:inputText id="Employee_lastname" required="true" value="#{userController.newEmployee.lastName}">
+            <f:validateRequired for="Employee_lastname" />
+        </h:inputText>
+        <h:message for="Employee_lastname" style="color: darkmagenta" />
+        <br/>
+        <h:commandButton value="OK" action="#{userController.processNewEmployee()}" />
+        <h:commandButton value="Cancel" immediate="true" action="#{userController.cancelNewEmployee()}" />
+    </h:form>
+    <br/>
+    <br/>
+
+    Add Administrator
+    <h:form>
+        *Login:
+        <h:inputText id="Administrator_login" required="true" value="#{userController.newAdministrator.login}">
+            <f:validateRequired for="Administrator_login" />
+        </h:inputText>
+        <h:message for="Administrator_login" style="color: darkmagenta" />
+        <br/>
+        *Name:
+        <h:inputText id="Administrator_name" required="true" value="#{userController.newAdministrator.name}">
+            <f:validateRequired for="Administrator_name" />
+        </h:inputText>
+        <h:message for="Administrator_name" style="color: darkmagenta" />
+        <br/>
+        *Last Name:
+        <h:inputText id="Administrator_lastname" required="true" value="#{userController.newAdministrator.lastName}">
+            <f:validateRequired for="Administrator_lastname" />
+        </h:inputText>
+        <h:message for="Administrator_lastname" style="color: darkmagenta" />
+        <br/>
+        <h:commandButton value="OK" action="#{userController.processNewAdministrator()}" />
+        <h:commandButton value="Cancel" immediate="true" action="#{userController.cancelNewAdministrator()}" />
+    </h:form>
+
+    <br/>
+    <br/>
+    <br/>
+
+    <h:form>
+        <h:commandButton action="main"  value="Back"/>
+    </h:form>
+</h:body>
+
+</html>

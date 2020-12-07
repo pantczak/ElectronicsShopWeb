@@ -35,7 +35,7 @@ public class EventManager implements Serializable {
         this.userRepository = userRepository;
     }
 
-    public boolean borrowDevice(UUID deviceID, UUID userID) {
+    public boolean borrowDevice(UUID deviceID, UUID userID, Date date) {
         Device device = deviceRepository.getDevice(deviceID);
         User user = userRepository.getUser(userID);
         if (device == null || user == null) {
@@ -50,19 +50,19 @@ public class EventManager implements Serializable {
     }
 
     public boolean returnDevice(Event event) {
-        if (event == null || event.getReturnDate() != null || eventRepository.getEvent(event.getId()) == null) {
+        if (event == null || event.getReturnDate() != null || eventRepository.getEvent(event.getUuid()) == null) {
             return false;
         }
-        eventRepository.endEvent(event.getId());
+        eventRepository.endEvent(event.getUuid());
         event.getDevice().setAvailable(true);
         return true;
     }
 
     public boolean cancelEvent(Event event) {
-        if (event == null || event.getReturnDate() != null || eventRepository.getEvent(event.getId()) == null) {
+        if (event == null || event.getReturnDate() != null || eventRepository.getEvent(event.getUuid()) == null) {
             return false;
         }
-        return eventRepository.deleteEvent(event.getId());
+        return eventRepository.deleteEvent(event.getUuid());
     }
 
     public Event getEvent(UUID uuid) {
@@ -73,16 +73,8 @@ public class EventManager implements Serializable {
         return eventRepository.getEventsByUser(uuid);
     }
 
-    public List<Event> getEventsForClient(User user) {
-        return eventRepository.getEventsByUser(user.getId());
-    }
-
     public List<Event> getEventsForDevice(UUID uuid) {
         return eventRepository.getEventsByDevice(uuid);
-    }
-
-    public List<Event> getEventsForDevice(Device device) {
-        return eventRepository.getEventsByDevice(device.getId());
     }
 
     public List<Event> getAllEvents() {

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Add Event</title>
+</h:head>
+
+<h:body>
+    <h1>Add Event</h1>
+    <br/>
+    <h:form>
+        *Device ID:
+        <h:inputText id="Resource_ID" value="#{eventController.deviceId}">
+            <f:validateRequired for="Resource_ID"/>
+        </h:inputText>
+        <h:message for="Resource_ID" style="color: darkmagenta"/>
+        <br/>
+
+        *Client ID:
+        <h:inputText id="Client_ID" value="#{eventController.clientId}">
+            <f:validateRequired for="Client_ID"/>
+        </h:inputText>
+        <h:message for="Client_ID" style="color: darkmagenta"/>
+        <br/>
+
+        *Date:
+        <h:inputText id="Borrow_date" value="#{eventController.borrowDate}">
+            <f:convertDateTime pattern="yyyy-MM-dd"/>
+        </h:inputText>
+        <h:message for="Borrow_date" style="color:darkmagenta"/>
+        <br/>
+        <h:commandButton value="OK" action="#{eventController.processEvent()}"/>
+        <h:commandButton value="Cancel" action="main"/>
+    </h:form>
+    <br/>
+    <br/>
+    <h:form>
+        <h:commandButton value="Back" action="main"/>
+    </h:form>
+</h:body>
+
+</html>

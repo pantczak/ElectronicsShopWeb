@@ -21,7 +21,7 @@ public class DeviceRepository implements IDeviceRepository, Serializable {
     @Override
     public boolean addDevice(Device device) {
         synchronized (devices) {
-            device.setId(UUID.randomUUID());
+            device.setUuid(UUID.randomUUID());
             return devices.add(device);
         }
     }
@@ -29,7 +29,7 @@ public class DeviceRepository implements IDeviceRepository, Serializable {
     @Override
     public Device getDevice(UUID uuid) {
         synchronized (devices) {
-            return devices.stream().filter(d -> d.getId() == uuid).findFirst().orElse(null);
+            return devices.stream().filter(d -> d.getUuid() == uuid).findFirst().orElse(null);
         }
     }
 
@@ -46,8 +46,8 @@ public class DeviceRepository implements IDeviceRepository, Serializable {
     public void updateDevice(UUID uuid, Device newDevice) {
         synchronized (devices) {
             for (Device r : devices) {
-                if (r.getId() == uuid) {
-                    newDevice.setId(uuid);
+                if (r.getUuid() == uuid) {
+                    newDevice.setUuid(uuid);
                     devices.set(devices.indexOf(r), newDevice);
                 }
             }

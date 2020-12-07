@@ -91,24 +91,24 @@ public class UserManager implements Serializable {
     }
 
     public boolean updateUser(User old, String login, String name, String lastName) {
-        if (old == null || userRepository.getUser(old.getId()) == null
+        if (old == null || userRepository.getUser(old.getUuid()) == null
                 || login == null || name == null || lastName == null) {
             return false;
         }
         if (old instanceof Employee) {
-            userRepository.updateUser(old.getId(), new Employee(name, lastName, login));
+            userRepository.updateUser(old.getUuid(), new Employee(name, lastName, login));
         } else if (old instanceof Administrator) {
-            userRepository.updateUser(old.getId(), new Administrator(name, lastName, login));
+            userRepository.updateUser(old.getUuid(), new Administrator(name, lastName, login));
         }
         return true;
     }
 
     public boolean updateClient(User old, String login, String name, String lastName, int age) {
-        if (old == null || userRepository.getUser(old.getId()) == null
+        if (old == null || userRepository.getUser(old.getUuid()) == null
                 || login == null || name == null || lastName == null || age > 0 || !(old instanceof Client)) {
             return false;
         }
-        userRepository.updateUser(old.getId(), new Client(name, lastName, login, age));
+        userRepository.updateUser(old.getUuid(), new Client(name, lastName, login, age));
         return true;
     }
 

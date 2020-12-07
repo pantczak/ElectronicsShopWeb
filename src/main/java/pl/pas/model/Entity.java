@@ -3,24 +3,24 @@ package pl.pas.model;
 import java.util.UUID;
 
 public abstract class Entity {
-    private  UUID id;
+    private  UUID uuid;
 
-    public UUID getId() {
-        return id;
+    public UUID getUuid() {
+        return uuid;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
     }
 
     public Entity() {
-        this.id = null;
+        this.uuid = null;
     }
 
     @Override
     public String toString() {
         return new org.apache.commons.lang3.builder.ToStringBuilder(this)
-                .append("id", id)
+                .append("id", uuid)
                 .toString();
     }
 }

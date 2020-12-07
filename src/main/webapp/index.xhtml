@@ -1,40 +1,33 @@
-<ui:composition template="/WEB-INF/template.xhtml"
-                xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                xmlns:h="http://java.sun.com/jsf/html">
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: pantczak
+  Date: 12/7/20
+  Time: 9:40 AM
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-    <ui:define name="header">
-        <h1>#{text['page.header.main_menu']}</h1>
-    </ui:define>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
 
-    <ui:define name="menu">
-        #{text['page.menu']}
-    </ui:define>
+<h:head>
+    <title>ElectronicsShop</title>
+</h:head>
 
-    <ui:define name="view">
-        <div class="flexbox_menu">
-            <div class="flexbox-item">
-                <h:link outcome="users">#{text['page.view.users']}</h:link>
-            </div>
-            <div class="flexbox-item">
-                <h:link outcome="devices">#{text['page.view.devices']}</h:link>
-            </div>
-            <div class="flexbox-item">
-                <h:link outcome="events">#{text['page.view.events']}</h:link>
-            </div>
-            <div class="flexbox-item">
-                <h:link outcome="addUser">#{text['page.view.addUser']}</h:link>
-            </div>
-            <div class="flexbox-item">
-                <h:link outcome="addDevice">#{text['page.view.addDevice']}</h:link>
-            </div>
-            <div class="flexbox-item">
-                <h:link outcome="addEvent">#{text['page.view.addEvent']}</h:link>
-            </div>
-        </div>
-    </ui:define>
+<h:body>
+    <h:link outcome="users">Users</h:link>
+    <br/>
+    <h:link outcome="devices">Devices</h:link>
+    <br/>
+    <h:link outcome="events">Events</h:link>
+    <br/>
+    <h:link outcome="addUser">AddUser</h:link>
+    <br/>
+    <h:link outcome="addDevice">AddDevice</h:link>
+    <br/>
+    <h:link outcome="addEvent">AddEvent</h:link>
+</h:body>
 
-    <ui:define name="content">
-        Welcome to the application!
-    </ui:define>
-</ui:composition>
+</html>

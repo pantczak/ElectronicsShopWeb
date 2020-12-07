@@ -28,8 +28,8 @@ public abstract class User extends Entity {
     }
 
     @Override
-    public UUID getId() {
-        return super.getId();
+    public UUID getUuid() {
+        return super.getUuid();
     }
 
     public String getName() {

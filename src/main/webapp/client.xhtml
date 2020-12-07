@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: pantczak
+  Date: 12/7/20
+  Time: 10:09 AM
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+    <title>Client</title>
+</h:head>
+
+<h:body>
+    <h1>Client</h1>
+
+
+    <h:dataTable value="#{userController.currentClient}">
+
+        <h:column>
+            <f:facet name="header">Client Id</f:facet>
+            #{userController.currentClient.uuid}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Login</f:facet>
+            #{userController.currentClient.login}
+        </h:column>
+
+
+        <h:column>
+            <f:facet name="header">Name</f:facet>
+            #{userController.currentClient.name}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Last Name</f:facet>
+            #{userController.currentClient.lastName}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Age</f:facet>
+            #{userController.currentClient.age}
+        </h:column>
+
+
+        <h:column>
+            <f:facet name="header">Active</f:facet>
+            #{userController.currentClient.active}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Actions</f:facet>
+            <h:form>
+                <h:commandButton value="Change activity" action="#{userController.changeActivity(userController.currentClient)}"/>
+            </h:form>
+        </h:column>
+
+    </h:dataTable>
+
+    <br/>
+    Edit Client's data:
+
+    <h:form>
+        <h:dataTable value="#{userController.currentClient}">
+
+            <h:column>
+                <f:facet name="header">Name*</f:facet>
+                <h:inputText id="Client_name" value="#{userController.currentClient.name}">
+                    <f:validateRequired for="Client_name"/>
+                </h:inputText>
+                <h:message for="Client_name" style="color: darkmagenta"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Last Name*</f:facet>
+                <h:inputText id="Client_lastname" value="#{userController.currentClient.lastName}">
+                    <f:validateRequired for="Client_lastname" />
+                </h:inputText>
+                <h:message for="Client_lastname" style="color: darkmagenta" />
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Age*</f:facet>
+                <h:inputText id="Client_age" value="#{userController.currentClient.age}">
+                    <f:validateRequired for="Client_age" />
+                    <f:validateLongRange for="Client_age" minimum="1" maximum="140"/>
+                </h:inputText>
+                <h:message for="Client_age" style="color: darkmagenta" />
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Actions</f:facet>
+                <h:commandButton value="Update" action="#{userController.updateClient}"/>
+            </h:column>
+        </h:dataTable>
+    </h:form>
+
+    <br/>
+    Client's devices:
+    <br/>
+
+    <h:dataTable value="#{eventController.eventManager.getEventsForClient(userController.currentClient.uuid)}" var="event">
+
+        <h:column>
+            <f:facet name="header">Id</f:facet>
+            #{event.borrowId}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Client Id</f:facet>
+            #{event.client.userId}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Device Id</f:facet>
+            #{event.resource.resourceId}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Borrow Date</f:facet>
+            #{event.borrowDate}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Return Date</f:facet>
+            #{event.returnDate}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Return</f:facet>
+            <h:form>
+                <h:commandButton value="Return" action="#{eventController.returnDevice(event)}"/>
+            </h:form>
+        </h:column>
+    </h:dataTable>
+
+    <br/>
+    <br/>
+
+    <h:form>
+        <h:commandButton action="users"  value="Back"/>
+    </h:form>
+
+</h:body>
+
+</html>

@@ -4,7 +4,6 @@ import pl.pas.model.Event;
 import pl.pas.model.resource.Device;
 import pl.pas.model.resource.Laptop;
 import pl.pas.model.resource.Smartphone;
-import pl.pas.model.user.Employee;
 import pl.pas.repositories.interfaces.IDeviceRepository;
 import pl.pas.repositories.interfaces.IEventRepository;
 import pl.pas.repositories.interfaces.IUserRepository;
@@ -48,7 +47,7 @@ public class DeviceManager implements Serializable {
     }
 
     public boolean deleteDevice(Device device) {
-        return deviceRepository.deleteDevice(device.getId());
+        return deviceRepository.deleteDevice(device.getUuid());
     }
 
     public boolean deleteDevice(UUID uuid) {
@@ -94,7 +93,7 @@ public class DeviceManager implements Serializable {
                 !(old instanceof Laptop) || !old.isAvailable()){
             return false;
         }
-        deviceRepository.updateDevice(old.getId(),new Laptop(brand, model, weightInGrams, memoryInGb));
+        deviceRepository.updateDevice(old.getUuid(),new Laptop(brand, model, weightInGrams, memoryInGb));
         return true;
     }
 
@@ -104,7 +103,7 @@ public class DeviceManager implements Serializable {
                 !(old instanceof Laptop) || !old.isAvailable()){
             return false;
         }
-        deviceRepository.updateDevice(old.getId(),new Smartphone(brand, model, weightInGrams, batteryLifetime));
+        deviceRepository.updateDevice(old.getUuid(),new Smartphone(brand, model, weightInGrams, batteryLifetime));
         return true;
     }
 }
