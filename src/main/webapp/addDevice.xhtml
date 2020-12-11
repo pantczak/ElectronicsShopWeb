@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+    <title>Add Device</title>
+</h:head>
+
+
+<h:body>
+    <h1>Add Device</h1>
+
+    <br/>
+    <br/>
+    <h3>Add Laptop</h3>
+    <br/>
+
+    <h:form>
+        *Brand:
+        <h:inputText id="laptop_brand" required="true" value="#{deviceController.newLaptop.brand}">
+            <f:validateRequired for="laptop_brand" />
+        </h:inputText>
+        <h:message for="laptop_brand" style="color: darkmagenta" />
+        <br/>
+        *Model:
+        <h:inputText id="laptop_model" required="true" value="#{deviceController.newLaptop.model}">
+            <f:validateRequired for="laptop_model" />
+        </h:inputText>
+        <h:message for="laptop_model" style="color: darkmagenta" />
+        <br/>
+        *Weight in grams:
+        <h:inputText id="laptop_weight" required="true" value="#{deviceController.newLaptop.weightInGrams}">
+            <f:validateRequired for="laptop_weight" />
+            <f:validateLongRange for="laptop_weight" minimum="1"/>
+        </h:inputText>
+        <h:message for="laptop_weight" style="color: darkmagenta" />
+        <br/>
+        *Memory in GB:
+        <h:inputText id="laptop_memory" required="true" value="#{deviceController.newLaptop.memoryInGb}">
+            <f:validateRequired for="laptop_memory" />
+            <f:validateLongRange for="laptop_memory" minimum="1" maximum="32" />
+        </h:inputText>
+        <h:message for="laptop_memory" style="color: darkmagenta" />
+        <br/>
+        <h:commandButton value="OK" action="#{deviceController.processNewLaptop()}" />
+        <h:commandButton value="Cancel" immediate="true" action="#{deviceController.cancelNewLaptop()}" />
+    </h:form>
+
+
+    <h3>Add Smartphone</h3>
+    <br/>
+
+    <h:form>
+        *Brand:
+        <h:inputText id="smartphone_brand" required="true" value="#{deviceController.newSmartphone.brand}">
+            <f:validateRequired for="smartphone_brand" />
+        </h:inputText>
+        <h:message for="smartphone_brand" style="color: darkmagenta" />
+        <br/>
+        *Model:
+        <h:inputText id="smartphone_model" required="true" value="#{deviceController.newSmartphone.model}">
+            <f:validateRequired for="smartphone_model" />
+        </h:inputText>
+        <h:message for="smartphone_model" style="color: darkmagenta" />
+        <br/>
+        *Weight in grams:
+        <h:inputText id="smartphone_weight" required="true" value="#{deviceController.newSmartphone.weightInGrams}">
+            <f:validateRequired for="smartphone_weight" />
+            <f:validateLongRange for="smartphone_weight" minimum="1"/>
+        </h:inputText>
+        <h:message for="smartphone_weight" style="color: darkmagenta" />
+        <br/>
+        *Battery life in hours:
+        <h:inputText id="smartphone_battery" required="true" value="#{deviceController.newSmartphone.batteryLifetime}">
+            <f:validateRequired for="smartphone_battery"/>
+            <f:validateLongRange for="smartphone_battery" minimum="1" />
+        </h:inputText>
+        <h:message for="smartphone_battery" style="color: darkmagenta" />
+        <br/>
+        <h:commandButton value="OK" action="#{deviceController.processNewSmartphone()}" />
+        <h:commandButton value="Cancel" immediate="true" action="#{deviceController.cancelNewSmartphone()}" />
+    </h:form>
+
+    <h:form>
+        <h:commandButton action="main"  value="Back"/>
+    </h:form>
+
+</h:body>
+
+</html>

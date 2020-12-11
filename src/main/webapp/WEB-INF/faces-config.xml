@@ -47,6 +47,16 @@
             <to-view-id>/addevent.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>devices</from-outcome>
+            <to-view-id>/devices.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>addDevice</from-outcome>
+            <to-view-id>/addDevice.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
     </navigation-rule>
 
 </faces-config>

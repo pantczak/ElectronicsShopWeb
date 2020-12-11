@@ -17,6 +17,14 @@ public abstract class Device extends Entity {
         this.weightInGrams = weightInGrams;
     }
 
+    public Device() {
+        super();
+        this.brand = "";
+        this.model = "";
+        this.isAvailable = true;
+        this.weightInGrams = 0;
+    }
+
     public String getBrand() {
         return brand;
     }

@@ -5,9 +5,14 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 public class Laptop extends Device {
     private int memoryInGb;
 
-    public Laptop( String brand, String model,  int weightInGrams, int memoryInGb) {
-        super( brand, model,weightInGrams);
+    public Laptop(String brand, String model, int weightInGrams, int memoryInGb) {
+        super(brand, model, weightInGrams);
         this.memoryInGb = memoryInGb;
+    }
+
+    public Laptop() {
+        super();
+        this.memoryInGb = 0;
     }
 
     public int getMemoryInGb() {

@@ -3,7 +3,7 @@ package pl.pas.model;
 import java.util.UUID;
 
 public abstract class Entity {
-    private  UUID uuid;
+    private UUID uuid;
 
     public UUID getUuid() {
         return uuid;

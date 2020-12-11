@@ -10,11 +10,16 @@ public class Smartphone extends Device {
         this.batteryLifetime = batteryLifetime;
     }
 
+    public Smartphone() {
+        super();
+        this.batteryLifetime = 0;
+    }
+
     public double getBatteryLifetime() {
         return batteryLifetime;
     }
 
-    public void setBatteryLifetime(int batteryLifetime) {
+    public void setBatteryLifetime(double batteryLifetime) {
         this.batteryLifetime = batteryLifetime;
     }
 
