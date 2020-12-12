@@ -21,14 +21,14 @@
 
     <h:form>
         Search by ID:
-        <h:inputText converter="UUIDConverter" value="#{eventController.eventId}"/>
-        <h:commandButton value="Search" action="#{eventController.search()}"/>
+        <h:inputText converter="UUIDConverter" value="#{eventController.eventUuid}"/>
+        <h:commandButton value="Search" action="#{eventController.search(eventController.eventUuid)}"/>
     </h:form>
 
     <br/>
     <h3>All Events</h3>
 
-    <h:dataTable value="#{eventController.eventManager.allEvents}" var="event">
+    <h:dataTable value="#{eventController.currentEvents}" var="event">
         <h:column>
             <f:facet name="header">Event Id</f:facet>
             #{event.uuid}
@@ -58,6 +58,13 @@
             <f:facet name="header">Return</f:facet>
             <h:form>
                 <h:commandButton value="Return" action="#{eventController.returnDevice(event)}"/>
+            </h:form>
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Delete</f:facet>
+            <h:form>
+                <h:commandButton value="Delete" action="#{eventController.deleteEvent(event)}"/>
             </h:form>
         </h:column>
     </h:dataTable>

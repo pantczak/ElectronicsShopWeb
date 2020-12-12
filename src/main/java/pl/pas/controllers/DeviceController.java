@@ -25,7 +25,7 @@ public class DeviceController implements Serializable {
     private UUID deviceUuid;
     private Laptop currentLaptop;
     private Smartphone currentSmartphone;
-    private List<Device> currentDevices;
+//    private List<Device> currentDevices;
     private List<Laptop> currentLaptops;
     private List<Smartphone> currentSmartphones;
 
@@ -69,13 +69,13 @@ public class DeviceController implements Serializable {
         this.currentSmartphone = currentSmartphone;
     }
 
-    public List<Device> getCurrentDevices() {
-        return currentDevices;
-    }
-
-    public void setCurrentDevices(List<Device> currentDevices) {
-        this.currentDevices = currentDevices;
-    }
+//    public List<Device> getCurrentDevices() {
+//        return currentDevices;
+//    }
+//
+//    public void setCurrentDevices(List<Device> currentDevices) {
+//        this.currentDevices = currentDevices;
+//    }
 
     public List<Smartphone> getCurrentSmartphones() {
         return currentSmartphones;
@@ -101,7 +101,7 @@ public class DeviceController implements Serializable {
 
     @PostConstruct
     public void initList() {
-        currentDevices = deviceManager.getAllDevices();
+//        currentDevices = deviceManager.getAllDevices();
         currentLaptops = deviceManager.getAllLaptops();
         currentSmartphones = deviceManager.getAllSmartphones();
 

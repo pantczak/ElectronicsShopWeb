@@ -22,13 +22,13 @@ public class DeviceManager implements Serializable {
     private IDeviceRepository deviceRepository;
     @Inject
     private IEventRepository eventRepository;
-    @Inject
-    private IUserRepository userRepository;
+//    @Inject
+//    private IUserRepository userRepository;
 
     public DeviceManager(IDeviceRepository deviceRepository, IEventRepository eventRepository, IUserRepository userRepository) {
         this.deviceRepository = deviceRepository;
         this.eventRepository = eventRepository;
-        this.userRepository = userRepository;
+//        this.userRepository = userRepository;
     }
 
     public DeviceManager() {
@@ -38,17 +38,17 @@ public class DeviceManager implements Serializable {
         return deviceRepository.getDevice(uuid);
     }
 
-    public List<Device> getAllDevices() {
-        return deviceRepository.getAllDevices();
-    }
-
-    public void updateDevice(UUID uuid, Device newDevice) {
-        deviceRepository.updateDevice(uuid, newDevice);
-    }
-
-    public boolean deleteDevice(Device device) {
-        return deviceRepository.deleteDevice(device.getUuid());
-    }
+//    public List<Device> getAllDevices() {
+//        return deviceRepository.getAllDevices();
+//    }
+//
+//    public void updateDevice(UUID uuid, Device newDevice) {
+//        deviceRepository.updateDevice(uuid, newDevice);
+//    }
+//
+//    public boolean deleteDevice(Device device) {
+//        return deviceRepository.deleteDevice(device.getUuid());
+//    }
 
     public boolean deleteDevice(UUID uuid) {
         if (deviceRepository.getDevice(uuid) == null) {

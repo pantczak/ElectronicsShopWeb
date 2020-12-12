@@ -63,7 +63,7 @@ public class EventManager implements Serializable {
         return true;
     }
 
-    public boolean endEvent(Event event) {
+    public boolean deleteEvent(Event event) {
         if (event == null || event.getReturnDate() != null || eventRepository.getEvent(event.getUuid()) == null) {
             return false;
         }

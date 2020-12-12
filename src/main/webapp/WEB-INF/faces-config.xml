@@ -43,6 +43,11 @@
             <redirect/>
         </navigation-case>
         <navigation-case>
+            <from-outcome>event</from-outcome>
+            <to-view-id>/event.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
             <from-outcome>addEvent</from-outcome>
             <to-view-id>/addevent.xhtml</to-view-id>
             <redirect/>
@@ -60,6 +65,11 @@
         <navigation-case>
             <from-outcome>smartphone</from-outcome>
             <to-view-id>/smartphone.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>laptop</from-outcome>
+            <to-view-id>/laptop.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>

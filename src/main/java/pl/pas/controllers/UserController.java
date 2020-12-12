@@ -100,14 +100,14 @@ public class UserController implements Serializable {
     }
 
 
-    public String viewClient(Client client) {
-        setCurrentClient(client);
-        return "client";
-    }
-
-    public String userList() {
-        return "users";
-    }
+//    public String viewClient(Client client) {
+//        setCurrentClient(client);
+//        return "client";
+//    }
+//
+//    public String userList() {
+//        return "users";
+//    }
 
     public String processNewClient() {
         userManager.addClient(newClient.getLogin(), newClient.getName(), newClient.getLastName(), newClient.getAge());

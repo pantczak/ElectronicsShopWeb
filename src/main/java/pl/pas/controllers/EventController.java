@@ -2,29 +2,31 @@ package pl.pas.controllers;
 
 import pl.pas.managers.EventManager;
 import pl.pas.model.Event;
-import pl.pas.model.resource.Laptop;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 
 @Named
-@ApplicationScoped
+@SessionScoped
 public class EventController implements Serializable {
 
     @Inject
     private EventManager eventManager;
 
-    private UUID deviceId;
     private UUID clientId;
+    private UUID deviceId;
     private Date borrowDate;
-    private UUID eventId;
+    private UUID eventUuid;
     private Event currentEvent;
+    private List<Event> currentEvents;
 
     public EventController(Date borrowDate) {
         this.borrowDate = new Date();
@@ -34,12 +36,17 @@ public class EventController implements Serializable {
 
     }
 
-    public UUID getDeviceId() {
-        return deviceId;
+    @PostConstruct
+    public void initList() {
+        currentEvents = eventManager.getAllEvents();
     }
 
-    public void setDeviceId(UUID deviceId) {
-        this.deviceId = deviceId;
+    public List<Event> getCurrentEvents() {
+        return currentEvents;
+    }
+
+    public void setCurrentEvents(List<Event> currentEvents) {
+        this.currentEvents = currentEvents;
     }
 
     public UUID getClientId() {
@@ -50,6 +57,14 @@ public class EventController implements Serializable {
         this.clientId = clientId;
     }
 
+    public UUID getDeviceId() {
+        return deviceId;
+    }
+
+    public void setDeviceId(UUID deviceId) {
+        this.deviceId = deviceId;
+    }
+
     public Date getBorrowDate() {
         return borrowDate;
     }
@@ -58,12 +73,12 @@ public class EventController implements Serializable {
         this.borrowDate = borrowDate;
     }
 
-    public UUID getEventId() {
-        return eventId;
+    public UUID getEventUuid() {
+        return eventUuid;
     }
 
-    public void setEventId(UUID eventId) {
-        this.eventId = eventId;
+    public void setEventUuid(UUID eventUuid) {
+        this.eventUuid = eventUuid;
     }
 
     public Event getCurrentEvent() {
@@ -90,7 +105,11 @@ public class EventController implements Serializable {
         return "main";
     }
 
-    public String search() {
+    public String search(UUID eventId) {
+        if (eventId ==null){
+            String viewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
+            return viewId + "?faces-redirect=true";
+        }
         currentEvent = eventManager.getEvent(eventId);
         return "event";
     }
@@ -100,4 +119,27 @@ public class EventController implements Serializable {
         String viewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
         return viewId + "?faces-redirect=true";
     }
+
+    public String deleteEvent(Event event) {
+        eventManager.deleteEvent(event);
+        updateEventList();
+        String viewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
+        return viewId + "?faces-redirect=true";
+    }
+
+    private String updateEventList() {
+        initList();
+        String viewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
+        return viewId + "?faces-redirect=true";
+    }
+
+    public String deleteEvent() {
+        eventManager.deleteEvent(currentEvent);
+        updateEventList();
+        currentEvent = new Event();
+        return "events";
+    }
+
+
+
 }

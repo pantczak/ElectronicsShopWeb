@@ -28,6 +28,14 @@ public class Event extends Entity {
         this.returnDate = null;
     }
 
+    public Event() {
+        super();
+        device = null;
+        client = null;
+        this.borrowDate = null;
+        this.returnDate = null;
+    }
+
     public Device getDevice() {
         return device;
     }
