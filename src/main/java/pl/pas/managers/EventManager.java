@@ -43,7 +43,7 @@ public class EventManager implements Serializable {
             return false;
         }
         if (device.isAvailable() && user instanceof Client && user.isActive()) {
-            eventRepository.addEvent(new Event(device, (Client) user, new Date()));
+            eventRepository.addEvent(new Event(device, (Client) user, date));
             device.setAvailable(false);
             return true;
         }
@@ -85,4 +85,6 @@ public class EventManager implements Serializable {
     public List<Event> getAllEvents() {
         return eventRepository.getAllEvents();
     }
+
+
 }

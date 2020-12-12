@@ -9,110 +9,110 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 <h:head>
-    <title>Smartphone</title>
+    <title>Laptop</title>
 </h:head>
 
-
 <h:body>
-    <h1>Smartphone</h1>
+    <h1>Laptop</h1>
     <br/>
     <br/>
 
-    <h:dataTable value="#{deviceController.currentSmartphone}">
+    <h:dataTable value="#{deviceController.currentLaptop}">
 
         <h:column>
             <f:facet name="header">Device Id</f:facet>
-            #{deviceController.currentSmartphone.uuid}
+            #{deviceController.currentLaptop.uuid}
         </h:column>
 
         <h:column>
             <f:facet name="header">Brand</f:facet>
-            #{deviceController.currentSmartphone.brand}
+            #{deviceController.currentLaptop.brand}
         </h:column>
 
         <h:column>
             <f:facet name="header">Model</f:facet>
-            #{deviceController.currentSmartphone.model}
+            #{deviceController.currentLaptop.model}
         </h:column>
 
         <h:column>
             <f:facet name="header">Weight in grams</f:facet>
-            #{deviceController.currentSmartphone.weightInGrams}
+            #{deviceController.currentLaptop.weightInGrams}
         </h:column>
 
         <h:column>
-            <f:facet name="header">Battery lifetime</f:facet>
-            #{deviceController.currentSmartphone.batteryLifetime}
+            <f:facet name="header">Memory in GB</f:facet>
+            #{deviceController.currentLaptop.memoryInGb}
         </h:column>
 
         <h:column>
             <f:facet name="header">Available</f:facet>
-            #{deviceController.currentSmartphone.available}
+            #{deviceController.currentLaptop.available}
         </h:column>
 
         <h:column>
             <f:facet name="header">Actions</f:facet>
             <h:form>
-                <h:commandButton value="Remove" action="#{deviceController.removeSmartphone}"/>
+                <h:commandButton value="Remove" action="#{deviceController.removeLaptop}"/>
             </h:form>
         </h:column>
     </h:dataTable>
     <br/>
-    <br/>
     <h3>Edit device data:</h3>
     <br/>
-
+    <br/>
 
     <h:form>
-        <h:dataTable value="#{deviceController.currentSmartphone}">
+        <h:dataTable value="#{deviceController.currentLaptop}">
 
             <h:column>
                 <f:facet name="header">*Brand</f:facet>
-                <h:inputText id="smartphone_brand" value="#{deviceController.currentSmartphone.brand}">
-                    <f:validateRequired for="smartphone_brand"/>
+                <h:inputText id="laptop_brand" value="#{deviceController.currentLaptop.brand}">
+                    <f:validateRequired for="laptop_brand"/>
                 </h:inputText>
-                <h:message for="smartphone_brand" style="color: darkmagenta"/>
+                <h:message for="laptop_brand" style="color: darkmagenta"/>
             </h:column>
 
             <h:column>
                 <f:facet name="header">*Model</f:facet>
-                <h:inputText id="smartphone_model" value="#{deviceController.currentSmartphone.model}">
-                    <f:validateRequired for="smartphone_model"/>
+                <h:inputText id="laptop_model" value="#{deviceController.currentLaptop.model}">
+                    <f:validateRequired for="laptop_model"/>
                 </h:inputText>
-                <h:message for="smartphone_model" style="color: red"/>
+                <h:message for="laptop_model" style="color: red"/>
             </h:column>
 
 
             <h:column>
                 <f:facet name="header">*Weight in grams</f:facet>
-                <h:inputText id="smartphone_weight" value="#{deviceController.currentSmartphone.weightInGrams}">
-                    <f:validateRequired for="smartphone_weight"/>
-                    <f:validateLongRange for="smartphone_weight" minimum="1"/>
+                <h:inputText id="laptop_weight" value="#{deviceController.currentLaptop.weightInGrams}">
+                    <f:validateRequired for="laptop_weight"/>
+                    <f:validateLongRange for="laptop_weight" minimum="1"/>
                 </h:inputText>
-                <h:message for="smartphone_weight" style="color: darkmagenta"/>
+                <h:message for="laptop_weight" style="color: darkmagenta"/>
             </h:column>
 
             <h:column>
                 <f:facet name="header">*Battery lifetime</f:facet>
-                <h:inputText id="smartphone_battery" value="#{deviceController.currentSmartphone.batteryLifetime}">
-                    <f:validateRequired for="smartphone_battery"/>
-                    <f:validateDoubleRange for="smartphone_battery" minimum="0.1"/>
+                <h:inputText id="laptop_memory" value="#{deviceController.currentLaptop.memoryInGb}">
+                    <f:validateRequired for="laptop_memory"/>
+                    <f:validateDoubleRange for="laptop_memory" minimum="1"/>
                 </h:inputText>
-                <h:message for="smartphone_battery" style="color: darkmagenta"/>
+                <h:message for="laptop_memory" style="color: darkmagenta"/>
             </h:column>
 
             <h:column>
                 <f:facet name="header">Actions</f:facet>
-                <h:commandButton value="Update" action="#{deviceController.updateSmartphone}"/>
+                <h:commandButton value="Update" action="#{deviceController.updateLaptop}"/>
             </h:column>
         </h:dataTable>
     </h:form>
-    <br/>
+
     <br/>
     <h3>Device borrows:</h3>
     <br/>
+    <br/>
 
-    <h:dataTable value="#{eventController.eventManager.getEventsForDevice(deviceController.currentSmartphone.uuid)}" var="event">
+    <h:dataTable value="#{eventController.eventManager.getEventsForDevice(deviceController.currentLaptop.uuid)}"
+                 var="event">
 
         <h:column>
             <f:facet name="header">Borrow Id</f:facet>
@@ -155,6 +155,5 @@
     </h:form>
 
 </h:body>
-
 
 </html>

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!DOCTYPE html
         PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -10,63 +9,55 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 <h:head>
-    <title>Events</title>
+    <title>Event</title>
 </h:head>
 
+
 <h:body>
-    <h1>Events</h1>
-    <br/>
-    <br/>
-    <br/><br/>
+    <h1>Event</h1>
 
-    <h:form>
-        Search by ID:
-        <h:inputText converter="UUIDConverter" value="#{eventController.eventId}"/>
-        <h:commandButton value="Search" action="#{eventController.search()}"/>
-    </h:form>
+    <h:dataTable value="#{eventController.currentEvent}">
 
-    <br/>
-    <h3>All Events</h3>
-
-    <h:dataTable value="#{eventController.eventManager.allEvents}" var="event">
         <h:column>
-            <f:facet name="header">Event Id</f:facet>
-            #{event.uuid}
+            <f:facet name="header">Borrow Id</f:facet>
+            #{eventController.currentEvent.uuid}
         </h:column>
 
         <h:column>
             <f:facet name="header">Client Id</f:facet>
-            #{event.client.uuid}
+            #{eventController.currentEvent.client.uuid}
         </h:column>
 
         <h:column>
-            <f:facet name="header">Device Id</f:facet>
-            #{event.device.uuid}
+            <f:facet name="header">Resource Id</f:facet>
+            #{eventController.currentEvent.device.uuid}
         </h:column>
 
         <h:column>
             <f:facet name="header">Borrow Date</f:facet>
-            #{event.borrowDate}
+            #{eventController.currentEvent.borrowDate}
         </h:column>
 
         <h:column>
             <f:facet name="header">Return Date</f:facet>
-            #{event.returnDate}
+            #{eventController.currentEvent.returnDate}
         </h:column>
 
         <h:column>
             <f:facet name="header">Return</f:facet>
             <h:form>
-                <h:commandButton value="Return" action="#{eventController.returnDevice(event)}"/>
+                <h:commandButton value="Return" action="#{eventController.returnDevice(eventController.currentEvent)}"/>
             </h:form>
         </h:column>
+
     </h:dataTable>
 
     <br/>
     <br/>
     <h:form>
-        <h:commandButton action="main" value="Back"/>
+        <h:commandButton action="events" value="Back"/>
     </h:form>
+
 </h:body>
 
 </html>

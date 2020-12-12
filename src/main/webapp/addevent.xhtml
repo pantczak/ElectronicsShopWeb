@@ -33,14 +33,16 @@
 
         *Date:
         <h:inputText id="Borrow_date" converter="UUIDConverter" value="#{eventController.borrowDate}">
+            <f:validateRequired for="Borrow_date"/>
             <f:convertDateTime pattern="yyyy-MM-dd"/>
         </h:inputText>
         <h:message for="Borrow_date" style="color:darkmagenta"/>
         <br/>
         <h:commandButton value="OK" action="#{eventController.processEvent()}"/>
+        <h:commandButton value="Cancel" immediate="true" action="main" />
     </h:form>
-    <br/>4f412fda-d73b-4a69-957b-3f3b98d29046
-    <br/>b4c2d8de-1de5-485a-a727-753a3013d77d
+    <br/>
+    <br/>
     <h:form>
         <h:commandButton value="Back" action="main"/>
     </h:form>

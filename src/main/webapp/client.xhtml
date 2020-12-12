@@ -110,18 +110,18 @@
     <h:dataTable value="#{eventController.eventManager.getEventsForClient(userController.currentClient.uuid)}" var="event">
 
         <h:column>
-            <f:facet name="header">Id</f:facet>
-            #{event.borrowId}
+            <f:facet name="header">Borrow Id</f:facet>
+            #{event.uuid}
         </h:column>
 
         <h:column>
             <f:facet name="header">Client Id</f:facet>
-            #{event.client.userId}
+            #{event.client.uuid}
         </h:column>
 
         <h:column>
             <f:facet name="header">Device Id</f:facet>
-            #{event.resource.resourceId}
+            #{event.device.uuid}
         </h:column>
 
         <h:column>

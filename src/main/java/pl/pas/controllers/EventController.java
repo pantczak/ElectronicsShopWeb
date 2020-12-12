@@ -2,6 +2,7 @@ package pl.pas.controllers;
 
 import pl.pas.managers.EventManager;
 import pl.pas.model.Event;
+import pl.pas.model.resource.Laptop;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.context.FacesContext;
