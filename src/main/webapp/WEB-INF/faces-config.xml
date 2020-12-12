@@ -57,6 +57,11 @@
             <to-view-id>/addDevice.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>smartphone</from-outcome>
+            <to-view-id>/smartphone.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
     </navigation-rule>
 
 </faces-config>

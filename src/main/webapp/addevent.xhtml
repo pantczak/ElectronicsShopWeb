@@ -18,30 +18,29 @@
     <br/>
     <h:form>
         *Device ID:
-        <h:inputText id="Resource_ID" value="#{eventController.deviceId}">
+        <h:inputText id="Resource_ID" converter="UUIDConverter" value="#{eventController.deviceId}">
             <f:validateRequired for="Resource_ID"/>
         </h:inputText>
         <h:message for="Resource_ID" style="color: darkmagenta"/>
         <br/>
 
         *Client ID:
-        <h:inputText id="Client_ID" value="#{eventController.clientId}">
+        <h:inputText id="Client_ID" converter="UUIDConverter" value="#{eventController.clientId}">
             <f:validateRequired for="Client_ID"/>
         </h:inputText>
         <h:message for="Client_ID" style="color: darkmagenta"/>
         <br/>
 
         *Date:
-        <h:inputText id="Borrow_date" value="#{eventController.borrowDate}">
+        <h:inputText id="Borrow_date" converter="UUIDConverter" value="#{eventController.borrowDate}">
             <f:convertDateTime pattern="yyyy-MM-dd"/>
         </h:inputText>
         <h:message for="Borrow_date" style="color:darkmagenta"/>
         <br/>
         <h:commandButton value="OK" action="#{eventController.processEvent()}"/>
-        <h:commandButton value="Cancel" action="main"/>
     </h:form>
-    <br/>
-    <br/>
+    <br/>4f412fda-d73b-4a69-957b-3f3b98d29046
+    <br/>b4c2d8de-1de5-485a-a727-753a3013d77d
     <h:form>
         <h:commandButton value="Back" action="main"/>
     </h:form>

@@ -86,9 +86,9 @@ public class UserManager implements Serializable {
         return userRepository.getAllAdministrators();
     }
 
-    public List<User> getAllActiveUsers() {
-        return userRepository.getAllActiveUsers();
-    }
+//    public List<User> getAllActiveUsers() {
+//        return userRepository.getAllActiveUsers();
+//    }
 
     public boolean updateUser(User old, String login, String name, String lastName) {
         if (old == null || userRepository.getUser(old.getUuid()) == null

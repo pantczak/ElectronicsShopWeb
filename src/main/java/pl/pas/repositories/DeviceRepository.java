@@ -5,11 +5,15 @@ import pl.pas.model.resource.Laptop;
 import pl.pas.model.resource.Smartphone;
 import pl.pas.repositories.interfaces.IDeviceRepository;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@Named
+@ApplicationScoped
 public class DeviceRepository implements IDeviceRepository, Serializable {
 
     private final List<Device> devices;
@@ -29,7 +33,7 @@ public class DeviceRepository implements IDeviceRepository, Serializable {
     @Override
     public Device getDevice(UUID uuid) {
         synchronized (devices) {
-            return devices.stream().filter(d -> d.getUuid() == uuid).findFirst().orElse(null);
+            return devices.stream().filter(d -> d.getUuid().equals(uuid)).findFirst().orElse(null);
         }
     }
 
@@ -46,7 +50,7 @@ public class DeviceRepository implements IDeviceRepository, Serializable {
     public void updateDevice(UUID uuid, Device newDevice) {
         synchronized (devices) {
             for (Device r : devices) {
-                if (r.getUuid() == uuid) {
+                if (r.getUuid().equals(uuid)) {
                     newDevice.setUuid(uuid);
                     devices.set(devices.indexOf(r), newDevice);
                 }

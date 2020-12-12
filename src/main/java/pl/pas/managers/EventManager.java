@@ -29,7 +29,8 @@ public class EventManager implements Serializable {
     public EventManager() {
     }
 
-    public EventManager(IDeviceRepository deviceRepository, IEventRepository eventRepository, IUserRepository userRepository) {
+    public EventManager(IDeviceRepository deviceRepository, IEventRepository eventRepository,
+                        IUserRepository userRepository) {
         this.deviceRepository = deviceRepository;
         this.eventRepository = eventRepository;
         this.userRepository = userRepository;
@@ -49,6 +50,10 @@ public class EventManager implements Serializable {
         return false;
     }
 
+    public boolean borrowDevice(UUID deviceID, UUID userID) {
+        return borrowDevice(deviceID, userID, new Date());
+    }
+
     public boolean returnDevice(Event event) {
         if (event == null || event.getReturnDate() != null || eventRepository.getEvent(event.getUuid()) == null) {
             return false;
@@ -58,7 +63,7 @@ public class EventManager implements Serializable {
         return true;
     }
 
-    public boolean cancelEvent(Event event) {
+    public boolean endEvent(Event event) {
         if (event == null || event.getReturnDate() != null || eventRepository.getEvent(event.getUuid()) == null) {
             return false;
         }

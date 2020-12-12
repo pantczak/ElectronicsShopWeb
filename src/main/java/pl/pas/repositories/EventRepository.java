@@ -3,12 +3,16 @@ package pl.pas.repositories;
 import pl.pas.model.Event;
 import pl.pas.repositories.interfaces.IEventRepository;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+@Named
+@ApplicationScoped
 public class EventRepository implements IEventRepository, Serializable {
     private final List<Event> events;
 
@@ -27,7 +31,7 @@ public class EventRepository implements IEventRepository, Serializable {
     @Override
     public Event getEvent(UUID uuid) {
         synchronized (events) {
-            return events.stream().filter(e -> e.getUuid() == uuid).findFirst().orElse(null);
+            return events.stream().filter(e -> e.getUuid().equals(uuid)).findFirst().orElse(null);
         }
     }
 
@@ -36,7 +40,7 @@ public class EventRepository implements IEventRepository, Serializable {
         List<Event> userEvents = new ArrayList<>();
         synchronized (events) {
             for (Event e : events) {
-                if (e.getClient().getUuid() == uuid) {
+                if (e.getClient().getUuid().equals(uuid)) {
                     userEvents.add(e);
                 }
             }
@@ -50,7 +54,7 @@ public class EventRepository implements IEventRepository, Serializable {
         List<Event> deviceEvents = new ArrayList<>();
         synchronized (events) {
             for (Event e : events) {
-                if (e.getDevice().getUuid() == uuid) {
+                if (e.getDevice().getUuid().equals(uuid)) {
                     deviceEvents.add(e);
                 }
             }
@@ -69,7 +73,7 @@ public class EventRepository implements IEventRepository, Serializable {
     public void updateEvent(UUID uuid, Event newEvent) {
         synchronized (events) {
             for (Event e : events) {
-                if (e.getUuid() == uuid) {
+                if (e.getUuid().equals(uuid)) {
                     newEvent.setUuid(uuid);
                     events.set(events.indexOf(e), newEvent);
                 }

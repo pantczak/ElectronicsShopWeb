@@ -4,7 +4,6 @@ import pl.pas.model.resource.Device;
 import pl.pas.model.user.Client;
 
 import java.util.Date;
-import java.util.UUID;
 
 public class Event extends Entity {
     private Device device;

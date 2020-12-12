@@ -6,11 +6,15 @@ import pl.pas.model.user.Employee;
 import pl.pas.model.user.User;
 import pl.pas.repositories.interfaces.IUserRepository;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@Named
+@ApplicationScoped
 public class UserRepository implements IUserRepository, Serializable {
     private final List<User> users;
 
@@ -31,7 +35,7 @@ public class UserRepository implements IUserRepository, Serializable {
     public User getUser(UUID uuid) {
         synchronized (users) {
             for (User u: users) {
-                if (u.getUuid() == uuid) return u;
+                if (u.getUuid().equals(uuid)) return u;
             }
             return null;
         }
@@ -55,7 +59,7 @@ public class UserRepository implements IUserRepository, Serializable {
     public void updateUser(UUID uuid, User newUser) {
         synchronized (users) {
             for (User u : users) {
-                if (u.getUuid() == uuid) {
+                if (u.getUuid().equals(uuid)) {
                     newUser.setUuid(uuid);
                     users.set(users.indexOf(u), newUser);
                 }

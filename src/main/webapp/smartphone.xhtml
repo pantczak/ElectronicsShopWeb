@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+    <title>Smartphone</title>
+</h:head>
+
+
+<h:body>
+    <h1>Smartphone</h1>
+    <br/>
+    <br/>
+
+    <h:dataTable value="#{deviceController.currentSmartphone}">
+
+        <h:column>
+            <f:facet name="header">Device Id</f:facet>
+            #{deviceController.currentSmartphone.uuid}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Brand</f:facet>
+            #{deviceController.currentSmartphone.brand}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Model</f:facet>
+            #{deviceController.currentSmartphone.model}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Weight in grams</f:facet>
+            #{deviceController.currentSmartphone.weightInGrams}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Battery lifetime</f:facet>
+            #{deviceController.currentSmartphone.batteryLifetime}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Available</f:facet>
+            #{deviceController.currentSmartphone.available}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Actions</f:facet>
+            <h:form>
+                <h:commandButton value="Remove" action="#{deviceController.removeSmartphone}"/>
+            </h:form>
+        </h:column>
+    </h:dataTable>
+    <br/>
+    <h3>Edit device data:</h3>
+    <br/>
+    <br/>
+
+    <h:form>
+        <h:dataTable value="#{deviceController.currentSmartphone}">
+
+            <h:column>
+                <f:facet name="header">*Brand</f:facet>
+                <h:inputText id="smartphone_brand" value="#{deviceController.currentSmartphone.brand}">
+                    <f:validateRequired for="smartphone_brand"/>
+                </h:inputText>
+                <h:message for="smartphone_brand" style="color: darkmagenta"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">*Model</f:facet>
+                <h:inputText id="smartphone_model" value="#{deviceController.currentSmartphone.model}">
+                    <f:validateRequired for="smartphone_model"/>
+                </h:inputText>
+                <h:message for="smartphone_model" style="color: red"/>
+            </h:column>
+
+
+            <h:column>
+                <f:facet name="header">*Weight in grams</f:facet>
+                <h:inputText id="smartphone_weight" value="#{deviceController.currentSmartphone.weightInGrams}">
+                    <f:validateRequired for="smartphone_weight"/>
+                    <f:validateLongRange for="smartphone_battery" minimum="1"/>
+                </h:inputText>
+                <h:message for="smartphone_weight" style="color: darkmagenta"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">*Battery lifetime</f:facet>
+                <h:inputText id="smartphone_battery" value="#{deviceController.currentSmartphone.batteryLifetime}">
+                    <f:validateRequired for="smartphone_battery"/>
+                    <f:validateDoubleRange for="smartphone_battery" minimum="0.1"/>
+                </h:inputText>
+                <h:message for="smartphone_battery" style="color: darkmagenta"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Actions</f:facet>
+                <h:commandButton value="Update" action="#{deviceController.updateSmartphone}"/>
+            </h:column>
+        </h:dataTable>
+    </h:form>
+
+    <br/>
+    <h3>Device borrows:</h3>
+    <br/>
+    <br/>
+
+    <h:dataTable value="#{eventController.eventManager.getEventsForDevice(deviceController.currentSmartphone.uuid)}" var="event">
+
+        <h:column>
+            <f:facet name="header">Borrow Id</f:facet>
+            #{event.uuid}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Client Id</f:facet>
+            #{event.client.uuid}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Device Id</f:facet>
+            #{event.device.uuid}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Borrow Date</f:facet>
+            #{event.borrowDate}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Return Date</f:facet>
+            #{event.returnDate}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Return</f:facet>
+            <h:form>
+                <h:commandButton value="Return" action="#{eventController.returnDevice(event)}"/>
+            </h:form>
+        </h:column>
+    </h:dataTable>
+
+</h:body>
+
+</html>

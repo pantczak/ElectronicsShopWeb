@@ -18,7 +18,7 @@
     <h3>Find Device by UUID</h3>
     <h:form>
         ID:
-        <h:inputText value="#{deviceController.deviceUuid}"/>
+        <h:inputText converter="UUIDConverter" value="#{deviceController.deviceUuid}"/>
         <h:commandButton value="Search" action="#{deviceController.findDevice(deviceController.deviceUuid)}"/>
     </h:form>
     <br/>
@@ -106,7 +106,7 @@
             <f:facet name="header">Actions</f:facet>
             <h:form>
                 <h:commandButton value="Remove" action="#{deviceController.removeDevice(smartphone)}"/>
-                <h:commandButton value="Show % Edit" action="#{deviceController.findDevice(smartphone.uuid)}"/>
+                <h:commandButton value="Show and Edit" action="#{deviceController.findDevice(smartphone.uuid)}"/>
             </h:form>
         </h:column>
     </h:dataTable>

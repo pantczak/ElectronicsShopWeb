@@ -11,9 +11,10 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
-@ApplicationScoped
+
 @Named
-public class EventController  implements Serializable {
+@ApplicationScoped
+public class EventController implements Serializable {
 
     @Inject
     private EventManager eventManager;
