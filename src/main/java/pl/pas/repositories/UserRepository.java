@@ -49,13 +49,6 @@ public class UserRepository implements IUserRepository, Serializable {
     }
 
     @Override
-    public List<User> getAllUsers() {
-        synchronized (users) {
-            return new ArrayList<>(users);
-        }
-    }
-
-    @Override
     public void updateUser(UUID uuid, User newUser) {
         synchronized (users) {
             for (User u : users) {
@@ -103,19 +96,6 @@ public class UserRepository implements IUserRepository, Serializable {
                 }
             }
             return administrators;
-        }
-    }
-
-    @Override
-    public List<User> getAllActiveUsers() {
-        synchronized (users) {
-            ArrayList<User> activeUsers = new ArrayList<>();
-            for (User user : users) {
-                if (user.isActive()) {
-                    activeUsers.add(user);
-                }
-            }
-            return activeUsers;
         }
     }
 }

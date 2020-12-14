@@ -70,18 +70,6 @@ public class EventRepository implements IEventRepository, Serializable {
     }
 
     @Override
-    public void updateEvent(UUID uuid, Event newEvent) {
-        synchronized (events) {
-            for (Event e : events) {
-                if (e.getUuid().equals(uuid)) {
-                    newEvent.setUuid(uuid);
-                    events.set(events.indexOf(e), newEvent);
-                }
-            }
-        }
-    }
-
-    @Override
     public boolean deleteEvent(UUID uuid) {
         synchronized (events){
             return events.remove(getEvent(uuid));
