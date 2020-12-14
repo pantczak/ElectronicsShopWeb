@@ -4,8 +4,6 @@ import pl.pas.model.user.Administrator;
 import pl.pas.model.user.Client;
 import pl.pas.model.user.Employee;
 import pl.pas.model.user.User;
-import pl.pas.repositories.interfaces.IDeviceRepository;
-import pl.pas.repositories.interfaces.IEventRepository;
 import pl.pas.repositories.interfaces.IUserRepository;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -18,19 +16,14 @@ import java.util.UUID;
 @Named
 @ApplicationScoped
 public class UserManager implements Serializable {
-//    @Inject
-//    private IDeviceRepository deviceRepository;
-//    @Inject
-//    private IEventRepository eventRepository;
     @Inject
     private IUserRepository userRepository;
 
     public UserManager() {
     }
 
-    public UserManager(IDeviceRepository deviceRepository, IEventRepository eventRepository, IUserRepository userRepository) {
-//        this.deviceRepository = deviceRepository;
-//        this.eventRepository = eventRepository;
+    public UserManager(IUserRepository userRepository) {
+
         this.userRepository = userRepository;
     }
 
@@ -66,14 +59,6 @@ public class UserManager implements Serializable {
         return userRepository.getUser(login);
     }
 
-//    public List<User> getAllUsers() {
-//        return userRepository.getAllUsers();
-//    }
-//
-//    public void updateUser(UUID uuid, User newUser) {
-//        userRepository.updateUser(uuid, newUser);
-//    }
-
     public List<Client> getAllClients() {
         return userRepository.getAllClients();
     }
@@ -85,10 +70,6 @@ public class UserManager implements Serializable {
     public List<User> getAllAdministrators() {
         return userRepository.getAllAdministrators();
     }
-
-//    public List<User> getAllActiveUsers() {
-//        return userRepository.getAllActiveUsers();
-//    }
 
     public boolean updateUser(User old, String login, String name, String lastName) {
         if (old == null || userRepository.getUser(old.getUuid()) == null

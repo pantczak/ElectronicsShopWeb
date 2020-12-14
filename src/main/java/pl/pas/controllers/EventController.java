@@ -21,19 +21,22 @@ public class EventController implements Serializable {
     @Inject
     private EventManager eventManager;
 
-    private UUID clientId;
-    private UUID deviceId;
+    private UUID clientUuid;
+    private UUID deviceUuid;
+    private UUID newEventClientUuid;
+    private UUID newEventDeviceUuid;
     private Date borrowDate;
     private UUID eventUuid;
     private Event currentEvent;
     private List<Event> currentEvents;
 
-    public EventController(Date borrowDate) {
-        this.borrowDate = new Date();
-    }
-
     public EventController() {
-
+        this.borrowDate = new Date();
+        this.clientUuid = null;
+        this.deviceUuid = null;
+        this.eventUuid = null;
+        this.newEventDeviceUuid = null;
+        this.newEventClientUuid = null;
     }
 
     @PostConstruct
@@ -49,20 +52,36 @@ public class EventController implements Serializable {
         this.currentEvents = currentEvents;
     }
 
-    public UUID getClientId() {
-        return clientId;
+    public UUID getClientUuid() {
+        return clientUuid;
     }
 
-    public void setClientId(UUID clientId) {
-        this.clientId = clientId;
+    public void setClientUuid(UUID clientUuid) {
+        this.clientUuid = clientUuid;
     }
 
-    public UUID getDeviceId() {
-        return deviceId;
+    public UUID getDeviceUuid() {
+        return deviceUuid;
     }
 
-    public void setDeviceId(UUID deviceId) {
-        this.deviceId = deviceId;
+    public UUID getNewEventClientUuid() {
+        return newEventClientUuid;
+    }
+
+    public void setNewEventClientUuid(UUID newEventClientUuid) {
+        this.newEventClientUuid = newEventClientUuid;
+    }
+
+    public UUID getNewEventDeviceUuid() {
+        return newEventDeviceUuid;
+    }
+
+    public void setNewEventDeviceUuid(UUID newEventDeviceUuid) {
+        this.newEventDeviceUuid = newEventDeviceUuid;
+    }
+
+    public void setDeviceUuid(UUID deviceUuid) {
+        this.deviceUuid = deviceUuid;
     }
 
     public Date getBorrowDate() {
@@ -98,39 +117,42 @@ public class EventController implements Serializable {
     }
 
     public String processEvent() {
-        this.eventManager.borrowDevice(deviceId, clientId, borrowDate);
-        this.deviceId = null;
-        this.clientId = null;
+        this.eventManager.borrowDevice(newEventDeviceUuid, newEventClientUuid, borrowDate);
+        this.newEventClientUuid = null;
+        this.newEventDeviceUuid = null;
         this.borrowDate = new Date();
-        return "main";
+        updateEventList();
+        return "menu";
     }
 
     public String search(UUID eventId) {
-        if (eventId ==null){
-            String viewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
-            return viewId + "?faces-redirect=true";
-        }
         currentEvent = eventManager.getEvent(eventId);
         return "event";
     }
 
+    public void searchByClient(UUID clientId) {
+        currentEvents = eventManager.getEventsForClient(clientId);
+    }
+
+    public void searchByDevice(UUID deviceId) {
+        currentEvents = eventManager.getEventsForDevice(deviceId);
+    }
+
     public String returnDevice(Event event) {
         eventManager.returnDevice(event);
-        String viewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
-        return viewId + "?faces-redirect=true";
+        return FacesContext.getCurrentInstance().getViewRoot().getViewId() + "?faces-redirect=true";
+
     }
 
     public String deleteEvent(Event event) {
         eventManager.deleteEvent(event);
         updateEventList();
-        String viewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
-        return viewId + "?faces-redirect=true";
+        return FacesContext.getCurrentInstance().getViewRoot().getViewId() + "?faces-redirect=true";
+
     }
 
-    private String updateEventList() {
+    public void updateEventList() {
         initList();
-        String viewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
-        return viewId + "?faces-redirect=true";
     }
 
     public String deleteEvent() {
@@ -139,7 +161,4 @@ public class EventController implements Serializable {
         currentEvent = new Event();
         return "events";
     }
-
-
-
 }

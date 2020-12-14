@@ -6,7 +6,6 @@ import pl.pas.model.resource.Laptop;
 import pl.pas.model.resource.Smartphone;
 import pl.pas.repositories.interfaces.IDeviceRepository;
 import pl.pas.repositories.interfaces.IEventRepository;
-import pl.pas.repositories.interfaces.IUserRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -22,13 +21,10 @@ public class DeviceManager implements Serializable {
     private IDeviceRepository deviceRepository;
     @Inject
     private IEventRepository eventRepository;
-//    @Inject
-//    private IUserRepository userRepository;
 
-    public DeviceManager(IDeviceRepository deviceRepository, IEventRepository eventRepository, IUserRepository userRepository) {
+    public DeviceManager(IDeviceRepository deviceRepository, IEventRepository eventRepository) {
         this.deviceRepository = deviceRepository;
         this.eventRepository = eventRepository;
-//        this.userRepository = userRepository;
     }
 
     public DeviceManager() {
@@ -37,18 +33,6 @@ public class DeviceManager implements Serializable {
     public Device getDevice(UUID uuid) {
         return deviceRepository.getDevice(uuid);
     }
-
-//    public List<Device> getAllDevices() {
-//        return deviceRepository.getAllDevices();
-//    }
-//
-//    public void updateDevice(UUID uuid, Device newDevice) {
-//        deviceRepository.updateDevice(uuid, newDevice);
-//    }
-//
-//    public boolean deleteDevice(Device device) {
-//        return deviceRepository.deleteDevice(device.getUuid());
-//    }
 
     public boolean deleteDevice(UUID uuid) {
         if (deviceRepository.getDevice(uuid) == null) {

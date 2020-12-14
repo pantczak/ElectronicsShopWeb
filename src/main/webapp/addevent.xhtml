@@ -18,14 +18,14 @@
     <br/>
     <h:form>
         *Device ID:
-        <h:inputText id="Resource_ID" converter="UUIDConverter" value="#{eventController.deviceId}">
+        <h:inputText id="Resource_ID" converter="UUIDConverter" value="#{eventController.newEventDeviceUuid}">
             <f:validateRequired for="Resource_ID"/>
         </h:inputText>
         <h:message for="Resource_ID" style="color: darkmagenta"/>
         <br/>
 
         *Client ID:
-        <h:inputText id="Client_ID" converter="UUIDConverter" value="#{eventController.clientId}">
+        <h:inputText id="Client_ID" converter="UUIDConverter" value="#{eventController.newEventClientUuid}">
             <f:validateRequired for="Client_ID"/>
         </h:inputText>
         <h:message for="Client_ID" style="color: darkmagenta"/>
@@ -39,12 +39,12 @@
         <h:message for="Borrow_date" style="color:darkmagenta"/>
         <br/>
         <h:commandButton value="OK" action="#{eventController.processEvent()}"/>
-        <h:commandButton value="Cancel" immediate="true" action="main" />
+        <h:commandButton value="Cancel" immediate="true" action="menu" />
     </h:form>
     <br/>
     <br/>
     <h:form>
-        <h:commandButton value="Back" action="main"/>
+        <h:commandButton value="Back" action="menu"/>
     </h:form>
 </h:body>
 

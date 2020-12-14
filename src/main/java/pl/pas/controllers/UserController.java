@@ -20,7 +20,6 @@ public class UserController implements Serializable {
     @Inject
     private UserManager userManager;
 
-
     private Client currentClient;
     private User currentUser;
     private Client newClient;
@@ -99,45 +98,37 @@ public class UserController implements Serializable {
         this.newAdministrator = new Administrator();
     }
 
-
-//    public String viewClient(Client client) {
-//        setCurrentClient(client);
-//        return "client";
-//    }
-//
-//    public String userList() {
-//        return "users";
-//    }
-
     public String processNewClient() {
         userManager.addClient(newClient.getLogin(), newClient.getName(), newClient.getLastName(), newClient.getAge());
         newClient = new Client();
-        return "main";
+        return "menu";
     }
+
     public String processNewEmployee() {
         userManager.addEmployee(newEmployee.getLogin(), newEmployee.getName(), newEmployee.getLastName());
         newEmployee = new Employee();
-        return "main";
+        return "menu";
     }
+
     public String processNewAdministrator() {
         userManager.addAdministrator(newAdministrator.getLogin(), newAdministrator.getName(), newAdministrator.getLastName());
         newAdministrator = new Administrator();
-        return "main";
+        return "menu";
     }
 
     public String cancelNewClient() {
         newClient = new Client();
-        return "main";
+        return "menu";
     }
 
     public String cancelNewEmployee() {
         newEmployee = new Employee();
-        return "main";
+        return "menu";
     }
 
     public String cancelNewAdministrator() {
         newAdministrator = new Administrator();
-        return "main";
+        return "menu";
     }
 
     public String changeActivity(User user) {
@@ -146,8 +137,7 @@ public class UserController implements Serializable {
         } else {
             userManager.activateUser(user);
         }
-        String viewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
-        return viewId + "?faces-redirect=true";
+        return FacesContext.getCurrentInstance().getViewRoot().getViewId() + "?faces-redirect=true";
     }
 
     public String searchId(UUID uuid) {
@@ -175,15 +165,15 @@ public class UserController implements Serializable {
     public String updateClient() {
         userManager.updateClient(currentClient, currentClient.getLogin(), currentClient.getName(),
                 currentClient.getLastName(), currentClient.getAge());
-        String viewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
-        return viewId + "?faces-redirect=true";
+        return FacesContext.getCurrentInstance().getViewRoot().getViewId() + "?faces-redirect=true";
+
     }
 
     public String updateUser() {
         userManager.updateUser(currentUser, currentUser.getLogin(), currentUser.getName(),
                 currentUser.getLastName());
-        String viewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
-        return viewId + "?faces-redirect=true";
+        return FacesContext.getCurrentInstance().getViewRoot().getViewId() + "?faces-redirect=true";
+
     }
 
 

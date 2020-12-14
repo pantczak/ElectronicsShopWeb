@@ -25,7 +25,6 @@ public class DeviceController implements Serializable {
     private UUID deviceUuid;
     private Laptop currentLaptop;
     private Smartphone currentSmartphone;
-//    private List<Device> currentDevices;
     private List<Laptop> currentLaptops;
     private List<Smartphone> currentSmartphones;
 
@@ -69,14 +68,6 @@ public class DeviceController implements Serializable {
         this.currentSmartphone = currentSmartphone;
     }
 
-//    public List<Device> getCurrentDevices() {
-//        return currentDevices;
-//    }
-//
-//    public void setCurrentDevices(List<Device> currentDevices) {
-//        this.currentDevices = currentDevices;
-//    }
-
     public List<Smartphone> getCurrentSmartphones() {
         return currentSmartphones;
     }
@@ -101,7 +92,6 @@ public class DeviceController implements Serializable {
 
     @PostConstruct
     public void initList() {
-//        currentDevices = deviceManager.getAllDevices();
         currentLaptops = deviceManager.getAllLaptops();
         currentSmartphones = deviceManager.getAllSmartphones();
 
@@ -111,32 +101,28 @@ public class DeviceController implements Serializable {
         this.deviceManager.addLaptop(newLaptop.getBrand(), newLaptop.getModel(), newLaptop.getWeightInGrams(), newLaptop.getMemoryInGb());
         this.newLaptop = new Laptop();
         updateDeviceList();
-        return "main";
+        return "menu";
     }
 
     public String processNewSmartphone() {
         this.deviceManager.addSmartphone(newSmartphone.getBrand(), newSmartphone.getModel(), newSmartphone.getWeightInGrams(), newSmartphone.getBatteryLifetime());
         this.newSmartphone = new Smartphone();
         updateDeviceList();
-        return "main";
+        return "menu";
     }
 
     public String cancelNewLaptop() {
         this.newLaptop = new Laptop();
-        return "main";
+        return "menu";
     }
 
     public String cancelNewSmartphone() {
         this.newSmartphone = new Smartphone();
-        return "main";
+        return "menu";
     }
 
     public String findDevice(UUID uuid) {
         Device device = deviceManager.getDevice(uuid);
-        if (device == null) {
-            String viewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
-            return viewId + "?faces-redirect=true";
-        }
         if (device instanceof Laptop) {
             currentLaptop = (Laptop) device;
             return "laptop";
@@ -149,8 +135,7 @@ public class DeviceController implements Serializable {
     public String removeDevice(Device device) {
         deviceManager.deleteDevice(device.getUuid());
         updateDeviceList();
-        String viewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
-        return viewId + "?faces-redirect=true";
+        return FacesContext.getCurrentInstance().getViewRoot().getViewId() + "?faces-redirect=true";
     }
 
     public String removeLaptop() {
@@ -168,21 +153,16 @@ public class DeviceController implements Serializable {
     public String updateLaptop() {
         deviceManager.updateLaptop(currentLaptop, currentLaptop.getBrand(), currentLaptop.getModel(), currentLaptop.getWeightInGrams(), currentLaptop.getMemoryInGb());
         updateDeviceList();
-        String viewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
-        return viewId + "?faces-redirect=true";
+        return FacesContext.getCurrentInstance().getViewRoot().getViewId() + "?faces-redirect=true";
     }
 
     public String updateSmartphone() {
         deviceManager.updateSmartphone(currentSmartphone, currentSmartphone.getBrand(), currentSmartphone.getModel(), currentSmartphone.getWeightInGrams(), currentSmartphone.getBatteryLifetime());
         updateDeviceList();
-        String viewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
-        return viewId + "?faces-redirect=true";
+        return FacesContext.getCurrentInstance().getViewRoot().getViewId() + "?faces-redirect=true";
     }
 
-
-    public String updateDeviceList() {
+    public void updateDeviceList() {
         initList();
-        String viewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
-        return viewId + "?faces-redirect=true";
     }
 }

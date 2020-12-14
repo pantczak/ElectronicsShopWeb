@@ -20,9 +20,17 @@
     <br/><br/>
 
     <h:form>
-        Search by ID:
+        Search by event ID:
         <h:inputText converter="UUIDConverter" value="#{eventController.eventUuid}"/>
         <h:commandButton value="Search" action="#{eventController.search(eventController.eventUuid)}"/>
+        <br/>
+        Search by Client ID:
+        <h:inputText converter="UUIDConverter" value="#{eventController.clientUuid}"/>
+        <h:commandButton value="Search" action="#{eventController.searchByClient(eventController.clientUuid)}"/>
+        <br/>
+        Search by Device ID:
+        <h:inputText converter="UUIDConverter" value="#{eventController.deviceUuid}"/>
+        <h:commandButton value="Search" action="#{eventController.searchByDevice(eventController.deviceUuid)}"/>
     </h:form>
 
     <br/>
@@ -72,7 +80,8 @@
     <br/>
     <br/>
     <h:form>
-        <h:commandButton action="main" value="Back"/>
+        <h:commandButton action="menu" value="Back"/>
+        <h:commandButton action="#{eventController.updateEventList}"  value="Refresh"/>
     </h:form>
 </h:body>
 
