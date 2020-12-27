@@ -72,6 +72,7 @@ public class EventRepository implements IEventRepository, Serializable {
     @Override
     public boolean deleteEvent(UUID uuid) {
         synchronized (events){
+            getEvent(uuid).getDevice().setAvailable(true);
             return events.remove(getEvent(uuid));
         }
     }
