@@ -13,11 +13,20 @@
       xmlns:h="http://java.sun.com/jsf/html">
 
 <h:head>
-    <title>Title</title>
+    <title>Login</title>
 </h:head>
 
 <h:body>
-
+    <div class="">Login form</div>
+    <form action="j_security_check" method="post">
+        Login: *<label>
+        <input type="text" name="j_username"/>
+    </label> <br/>
+        Password: *<label>
+        <input type="password" name="j_password"/>
+    </label>
+        <input type="submit" value="OK"/>
+    </form>
 </h:body>
 
 </html>
