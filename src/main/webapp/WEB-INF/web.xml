@@ -11,17 +11,51 @@
     <security-role>
         <role-name>Administrator</role-name>
     </security-role>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>AdminPages</web-resource-name>
+            <url-pattern>/admin/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>Administrator</role-name>
+        </auth-constraint>
+    </security-constraint>
     <security-role>
         <role-name>Employee</role-name>
     </security-role>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>EmployeePages</web-resource-name>
+            <url-pattern>/employee/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>Employee</role-name>
+        </auth-constraint>
+    </security-constraint>
     <security-role>
         <role-name>Client</role-name>
     </security-role>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>ClientPages</web-resource-name>
+            <url-pattern>/client/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>Client</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <form-login-config>
+            <form-login-page>/auth/auth.xhtml</form-login-page>
+            <form-error-page>/auth/auth_err.xhtml</form-error-page>
+        </form-login-config>
+    </login-config>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
-        <welcome-file>faces/index.xhtml</welcome-file>
+        <welcome-file>faces/auth/auth.xhtml</welcome-file>
     </welcome-file-list>
 </web-app>
