@@ -12,13 +12,13 @@
 
 <h:body>
     <h:outputLabel value="Hello, #{logOutController.username}"/>
-    <h:outputLabel value="Your role is, #{facesContext.externalContex.}"/>  <!--TODO get user role from payara -->
+    <h:outputLabel
+            value="Your role is, #{userManager.getUserRole(userManager.getUser(facesContext.externalContext.getUserPrincipal().name))}"/>  <!--TODO get user role from payara -->
     <p/>
     <h:form>
         <h:commandButton value="Logout" action="#{logOutController.logout}"/>
     </h:form>
     <br/>
-<!-- TODO fix context-->
     <h:link outcome="users" rendered="#{facesContext.externalContext.isUserInRole('Administrator')}">Users</h:link>
     <br/>
     <h:link outcome="devices" rendered="#{facesContext.externalContext.isUserInRole('Employee')}">Devices</h:link>
@@ -31,10 +31,9 @@
     <br/>
     <h:link outcome="addEvent" rendered="#{facesContext.externalContext.isUserInRole('Employee')}">AddEvent</h:link>
     <br/>
-    <h:link outcome="rentDevice" rendered="#{facesContext.externalContext.isUserInRole('Client')}">RentDevice</h:link>
+    <h:link outcome="borrowDevice" rendered="#{facesContext.externalContext.isUserInRole('Client')}">BorrowDevice</h:link>
     <br/>
     <h:link outcome="userDetails" rendered="#{facesContext.externalContext.isUserInRole('Client')}">Details</h:link>
-
 
 
 </h:body>

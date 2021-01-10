@@ -59,6 +59,19 @@ public class UserManager implements Serializable {
         return userRepository.getUser(login);
     }
 
+    public String getUserRole(User user) {
+        if (user instanceof Client) {
+            return "Client";
+        }
+        if (user instanceof Employee) {
+            return "Employee";
+        }
+        if (user instanceof Administrator) {
+            return "Administrator";
+        }
+        return null;
+    }
+
     public List<Client> getAllClients() {
         return userRepository.getAllClients();
     }
@@ -93,8 +106,8 @@ public class UserManager implements Serializable {
         return true;
     }
 
-    public boolean activateUser(User user){
-        if (user == null){
+    public boolean activateUser(User user) {
+        if (user == null) {
             return false;
         }
         user.setActive(true);

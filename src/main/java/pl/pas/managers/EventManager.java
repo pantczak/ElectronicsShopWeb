@@ -54,6 +54,10 @@ public class EventManager implements Serializable {
         return borrowDevice(deviceID, userID, new Date());
     }
 
+    public boolean borrowDeviceByLogin(UUID deviceID, String userLogin) {
+        return borrowDevice(deviceID, userRepository.getUser(userLogin).getUuid(), new Date());
+    }
+
     public boolean returnDevice(Event event) {
         if (event == null || event.getReturnDate() != null || eventRepository.getEvent(event.getUuid()) == null) {
             return false;
