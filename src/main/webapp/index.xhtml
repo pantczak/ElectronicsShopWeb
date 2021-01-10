@@ -11,6 +11,13 @@
 </h:head>
 
 <h:body>
+    <h:outputLabel value="Hello, #{logOutController.username}"/>
+    <p/>
+    <h:form>
+        <h:commandButton value="Logout" action="#{logOutController.logout}"/>
+    </h:form>
+    <br/>
+
     <h:link outcome="users">Users</h:link>
     <br/>
     <h:link outcome="devices">Devices</h:link>

@@ -53,6 +53,7 @@
 
     <login-config>
         <auth-method>FORM</auth-method>
+        <realm-name>file</realm-name>
         <form-login-config>
             <form-login-page>/auth/auth.xhtml</form-login-page>
             <form-error-page>/auth/auth_err.xhtml</form-error-page>
