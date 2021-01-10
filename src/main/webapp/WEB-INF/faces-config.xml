@@ -48,6 +48,16 @@
             <redirect />
         </navigation-case>
         <navigation-case>
+            <from-outcome>userDetails</from-outcome>
+            <to-view-id>/userDetails.xhtml</to-view-id>
+            <redirect include-view-params="true">
+                <redirect-param>
+                    <name>login</name>
+                    <value>#{userDetailsController.login}</value>
+                </redirect-param>
+            </redirect>
+        </navigation-case>
+        <navigation-case>
             <from-outcome>client</from-outcome>
             <to-view-id>/client.xhtml</to-view-id>
             <redirect/>

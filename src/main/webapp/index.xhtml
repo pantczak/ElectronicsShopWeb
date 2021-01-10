@@ -4,7 +4,9 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 <h:head>
     <title>ElectronicsShop</title>
@@ -33,7 +35,8 @@
     <br/>
     <h:link outcome="borrowDevice" rendered="#{facesContext.externalContext.isUserInRole('Client')}">BorrowDevice</h:link>
     <br/>
-    <h:link outcome="userDetails" rendered="#{facesContext.externalContext.isUserInRole('Client')}">Details</h:link>
+    <h:link outcome="userDetails" rendered="#{facesContext.externalContext.isUserInRole('Client')}">Details
+        <f:param name="login" value="#{request.remoteUser}"/></h:link>
 
 
 </h:body>
