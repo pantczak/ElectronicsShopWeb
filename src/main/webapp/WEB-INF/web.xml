@@ -8,9 +8,11 @@
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+
     <security-role>
         <role-name>Administrator</role-name>
     </security-role>
+
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>AdminPages</web-resource-name>
@@ -20,9 +22,11 @@
             <role-name>Administrator</role-name>
         </auth-constraint>
     </security-constraint>
+
     <security-role>
         <role-name>Employee</role-name>
     </security-role>
+
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>EmployeePages</web-resource-name>
@@ -32,9 +36,11 @@
             <role-name>Employee</role-name>
         </auth-constraint>
     </security-constraint>
+
     <security-role>
         <role-name>Client</role-name>
     </security-role>
+
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>ClientPages</web-resource-name>
@@ -44,6 +50,7 @@
             <role-name>Client</role-name>
         </auth-constraint>
     </security-constraint>
+
     <login-config>
         <auth-method>FORM</auth-method>
         <form-login-config>
@@ -51,6 +58,17 @@
             <form-error-page>/auth/auth_err.xhtml</form-error-page>
         </form-login-config>
     </login-config>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Secured URLs</web-resource-name>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>

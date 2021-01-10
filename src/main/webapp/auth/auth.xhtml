@@ -10,7 +10,9 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:head>
     <title>Login</title>
@@ -18,15 +20,15 @@
 
 <h:body>
     <div class="">Login form</div>
-    <form action="j_security_check" method="post">
-        Login: *<label>
-        <input type="text" name="j_username"/>
-    </label> <br/>
-        Password: *<label>
-        <input type="password" name="j_password"/>
-    </label>
-        <input type="submit" value="OK"/>
-    </form>
+    <h:form>
+        Login: *
+        <h:inputText id="j_username" autocomplete="off" value="#{logInController.username}"/>
+        <br/>
+        Password: *
+        <h:inputSecret id="j_password" autocomplete="off" value="#{logInController.password}"/>
+        <br/>
+        <h:commandButton value="Login" type="submit" action="#{logInController.login()}"/>
+    </h:form>
 </h:body>
 
 </html>
