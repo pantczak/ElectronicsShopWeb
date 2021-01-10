@@ -11,8 +11,10 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Named
 @ApplicationScoped
@@ -28,6 +30,12 @@ public class DeviceManager implements Serializable {
     }
 
     public DeviceManager() {
+    }
+
+    //TODO
+    public List<Device> getAvailableDevices() {
+        List<Event> rents = eventRepository.getAllEvents();
+        return deviceRepository.getAllDevices().stream().filter(x -> rents.stream().noneMatch(e -> e.getDevice().getUuid().equals(x.getUuid()))).collect(Collectors.toList());
     }
 
     public Device getDevice(UUID uuid) {
@@ -74,20 +82,20 @@ public class DeviceManager implements Serializable {
     public boolean updateLaptop(Device old, String brand, String model, int weightInGrams, int memoryInGb) {
         if (old == null || brand == null || model == null || weightInGrams <= 0 || memoryInGb <= 0 ||
                 !deviceRepository.getAllDevices().contains(old) ||
-                !(old instanceof Laptop) || !old.isAvailable()){
+                !(old instanceof Laptop) || !old.isAvailable()) {
             return false;
         }
-        deviceRepository.updateDevice(old.getUuid(),new Laptop(brand, model, weightInGrams, memoryInGb));
+        deviceRepository.updateDevice(old.getUuid(), new Laptop(brand, model, weightInGrams, memoryInGb));
         return true;
     }
 
     public boolean updateSmartphone(Device old, String brand, String model, int weightInGrams, double batteryLifetime) {
         if (old == null || brand == null || model == null || weightInGrams <= 0 || batteryLifetime <= 0 ||
                 !deviceRepository.getAllDevices().contains(old) ||
-                !(old instanceof Laptop) || !old.isAvailable()){
+                !(old instanceof Laptop) || !old.isAvailable()) {
             return false;
         }
-        deviceRepository.updateDevice(old.getUuid(),new Smartphone(brand, model, weightInGrams, batteryLifetime));
+        deviceRepository.updateDevice(old.getUuid(), new Smartphone(brand, model, weightInGrams, batteryLifetime));
         return true;
     }
 }
