@@ -13,29 +13,9 @@
         <role-name>Administrator</role-name>
     </security-role>
 
-    <security-constraint>
-        <web-resource-collection>
-            <web-resource-name>AdminPages</web-resource-name>
-            <url-pattern>/admin/*</url-pattern>
-        </web-resource-collection>
-        <auth-constraint>
-            <role-name>Administrator</role-name>
-        </auth-constraint>
-    </security-constraint>
-
     <security-role>
         <role-name>Employee</role-name>
     </security-role>
-
-    <security-constraint>
-        <web-resource-collection>
-            <web-resource-name>EmployeePages</web-resource-name>
-            <url-pattern>/employee/*</url-pattern>
-        </web-resource-collection>
-        <auth-constraint>
-            <role-name>Employee</role-name>
-        </auth-constraint>
-    </security-constraint>
 
     <security-role>
         <role-name>Client</role-name>
@@ -43,8 +23,43 @@
 
     <security-constraint>
         <web-resource-collection>
+            <web-resource-name>MainPages</web-resource-name>
+            <url-pattern>/main/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>Administrator</role-name>
+            <role-name>Client</role-name>
+            <role-name>Employee</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>AdminPages</web-resource-name>
+            <url-pattern>/main/admin/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>Administrator</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>EmployeePages</web-resource-name>
+            <url-pattern>/main/employee/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>Employee</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+
+    <security-constraint>
+        <web-resource-collection>
             <web-resource-name>ClientPages</web-resource-name>
-            <url-pattern>/client/*</url-pattern>
+            <url-pattern>/main/client/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>Client</role-name>
@@ -72,9 +87,11 @@
 
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>/faces/*</url-pattern>
+        <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
+
+
     <welcome-file-list>
-        <welcome-file>faces/auth/auth.xhtml</welcome-file>
+        <welcome-file>main/index.xhtml</welcome-file>
     </welcome-file-list>
 </web-app>

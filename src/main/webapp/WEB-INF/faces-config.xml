@@ -14,7 +14,7 @@
         <from-view-id/>
         <navigation-case>
             <from-outcome>menu</from-outcome>
-            <to-view-id>/index.xhtml</to-view-id>
+            <to-view-id>/main/index.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
@@ -29,72 +29,67 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>addUser</from-outcome>
-            <to-view-id>/adduser.xhtml</to-view-id>
+            <to-view-id>/main/admin/adduser.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>users</from-outcome>
-            <to-view-id>/users.xhtml</to-view-id>
+            <to-view-id>/main/admin/users.xhtml</to-view-id>
             <redirect />
         </navigation-case>
         <navigation-case>
             <from-outcome>user</from-outcome>
-            <to-view-id>/user.xhtml</to-view-id>
+            <to-view-id>/main/admin/user.xhtml</to-view-id>
             <redirect />
         </navigation-case>
         <navigation-case>
             <from-outcome>borrowDevice</from-outcome>
-            <to-view-id>/borrowDevice.xhtml</to-view-id>
+            <to-view-id>/main/client/borrowDevice.xhtml</to-view-id>
             <redirect />
         </navigation-case>
         <navigation-case>
             <from-outcome>userDetails</from-outcome>
-            <to-view-id>/userDetails.xhtml</to-view-id>
-            <redirect include-view-params="true">
-                <redirect-param>
-                    <name>login</name>
-                    <value>#{userDetailsController.login}</value>
-                </redirect-param>
-            </redirect>
+            <to-view-id>/main/client/userDetails.xhtml</to-view-id>
+            <redirect />
         </navigation-case>
         <navigation-case>
             <from-outcome>client</from-outcome>
-            <to-view-id>/client.xhtml</to-view-id>
+            <to-view-id>/main/admin/client.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>events</from-outcome>
-            <to-view-id>/events.xhtml</to-view-id>
+            <to-view-id>/main/employee/events.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>event</from-outcome>
-            <to-view-id>/event.xhtml</to-view-id>
+            <to-view-id>/main/employee/event.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>addEvent</from-outcome>
-            <to-view-id>/addevent.xhtml</to-view-id>
+            <to-view-id>/main/employee/addevent.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>devices</from-outcome>
-            <to-view-id>/devices.xhtml</to-view-id>
+            <to-view-id>/main/employee/devices.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>addDevice</from-outcome>
-            <to-view-id>/addDevice.xhtml</to-view-id>
+            <to-view-id>/main/employee/addDevice.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>smartphone</from-outcome>
-            <to-view-id>/smartphone.xhtml</to-view-id>
+            <to-view-id>/main/employee/smartphone.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>laptop</from-outcome>
-            <to-view-id>/laptop.xhtml</to-view-id>
+            <to-view-id>/main/employee/laptop.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>

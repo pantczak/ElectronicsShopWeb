@@ -14,8 +14,9 @@
 
 <h:body>
     <h:outputLabel value="Hello, #{logOutController.username}"/>
+    <br/>
     <h:outputLabel
-            value="Your role is, #{userManager.getUserRole(userManager.getUser(facesContext.externalContext.getUserPrincipal().name))}"/>  <!--TODO get user role from payara -->
+            value="Your role is:  #{userManager.getUserRole(userManager.getUser(facesContext.externalContext.getUserPrincipal().name))}"/>
     <p/>
     <h:form>
         <h:commandButton value="Logout" action="#{logOutController.logout}"/>
@@ -35,8 +36,7 @@
     <br/>
     <h:link outcome="borrowDevice" rendered="#{facesContext.externalContext.isUserInRole('Client')}">BorrowDevice</h:link>
     <br/>
-    <h:link outcome="userDetails" rendered="#{facesContext.externalContext.isUserInRole('Client')}">Details
-        <f:param name="login" value="#{request.remoteUser}"/></h:link>
+    <h:link outcome="userDetails" rendered="#{facesContext.externalContext.isUserInRole('Client')}">Details</h:link>
 
 
 </h:body>

@@ -35,7 +35,8 @@ public class DeviceManager implements Serializable {
     //TODO
     public List<Device> getAvailableDevices() {
         List<Event> rents = eventRepository.getAllEvents();
-        return deviceRepository.getAllDevices().stream().filter(x -> rents.stream().noneMatch(e -> e.getDevice().getUuid().equals(x.getUuid()))).collect(Collectors.toList());
+//        return deviceRepository.getAllDevices().stream().filter(x -> rents.stream().noneMatch(e -> e.getDevice().getUuid().equals(x.getUuid()))).collect(Collectors.toList());
+        return  deviceRepository.getAllDevices().stream().filter(Device::isAvailable).collect(Collectors.toList());
     }
 
     public Device getDevice(UUID uuid) {

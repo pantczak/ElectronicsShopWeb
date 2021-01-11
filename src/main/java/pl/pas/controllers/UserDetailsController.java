@@ -5,9 +5,11 @@ import pl.pas.managers.UserManager;
 import pl.pas.model.Event;
 import pl.pas.model.user.User;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
@@ -16,8 +18,11 @@ import java.io.Serializable;
 import java.util.List;
 
 @Named
-@SessionScoped
+@ViewScoped
 public class UserDetailsController implements Serializable {
+    @Inject
+    HttpServletRequest request;
+
     @Inject
     private UserManager userManager;
     @Inject
@@ -25,34 +30,22 @@ public class UserDetailsController implements Serializable {
 
     private String login;
 
-    private User user;
-
     public String getLogin() {
         return login;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void loadUser() throws Exception {
-        if (login != null) {
-            user = userManager.getUser(login);
-            if (user ==null) throw new Exception();
-        }
+    @PostConstruct
+    public void init() {
+        login = request.getRemoteUser();
     }
 
     public List<Event> getUserBorrows() {
-        return eventManager.getEventsForClient(user.getUuid());
+        return eventManager.getEventsForClient(userManager.getUser(login).getUuid());
     }
 
     public void endBorrow(Event event) throws IOException {
         eventManager.returnDevice(event);
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-        ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI().concat("?login=" + user.getLogin()));
+        ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
     }
 }

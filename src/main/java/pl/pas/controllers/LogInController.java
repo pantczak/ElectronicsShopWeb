@@ -3,6 +3,7 @@ package pl.pas.controllers;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,9 @@ import java.io.Serializable;
 @RequestScoped
 @Named
 public class LogInController implements Serializable {
+    @Inject
+    private HttpServletRequest request;
+
     private String username;
     private String password;
 
@@ -23,7 +27,7 @@ public class LogInController implements Serializable {
             return "menu";
         } catch (ServletException e) {
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "login_failed", null));
-            return null;
+            return "auth_err";
         }
     }
 

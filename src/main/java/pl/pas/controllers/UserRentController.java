@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
@@ -18,16 +19,21 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
-@SessionScoped
+@ViewScoped
 @Named
 public class UserRentController implements Serializable {
     private List<Device> availableDevices;
+
+    @Inject
+    private HttpServletRequest request;
 
     @Inject
     private EventManager eventManager;
 
     @Inject
     private DeviceManager deviceManager;
+
+    private String currentUserLogin;
 
     private UUID searchDeviceUUID;
 
@@ -46,6 +52,7 @@ public class UserRentController implements Serializable {
     @PostConstruct
     public void init() {
         availableDevices = deviceManager.getAvailableDevices();
+        currentUserLogin = request.getRemoteUser();
     }
 
     public void findDevice() {
@@ -59,8 +66,7 @@ public class UserRentController implements Serializable {
     }
 
     public void borrowDevice(Device device) {
-        String userLogin = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
-        eventManager.borrowDeviceByLogin(device.getUuid(), userLogin);
+        eventManager.borrowDeviceByLogin(device.getUuid(), currentUserLogin);
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         try {
             ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
@@ -74,8 +80,5 @@ public class UserRentController implements Serializable {
     public void updateDeviceList() {
         init();
     }
-
-
-    //TODO RENT , SHOW  AVAILABLE DEVICES
 
 }
