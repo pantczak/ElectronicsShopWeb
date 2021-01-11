@@ -30,13 +30,20 @@ public class UserDetailsController implements Serializable {
 
     private String login;
 
+    private User userForDetails;
+
     public String getLogin() {
         return login;
+    }
+
+    public User getUserForDetails() {
+        return userForDetails;
     }
 
     @PostConstruct
     public void init() {
         login = request.getRemoteUser();
+        userForDetails = userManager.getUser(login);
     }
 
     public List<Event> getUserBorrows() {

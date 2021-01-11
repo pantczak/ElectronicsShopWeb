@@ -22,6 +22,16 @@
 <h:form>
     Login:
     <h:outputText value="#{userDetailsController.login}">Login:</h:outputText>
+    <br/>
+    Name:
+    <h:outputText value="#{userDetailsController.userForDetails.name}">Name:</h:outputText>
+    <br/>
+    Last name:
+    <h:outputText value="#{userDetailsController.userForDetails.lastName}">Last name:</h:outputText>
+    <br/>
+    Active:
+    <h:outputText value="#{userDetailsController.userForDetails.active}">Active:</h:outputText>
+
 
     <h:dataTable value="#{userDetailsController.userBorrows}" var="borrow">
         <h:column>
