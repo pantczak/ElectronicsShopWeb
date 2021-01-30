@@ -27,11 +27,19 @@ public class UserManager implements Serializable {
         this.userRepository = userRepository;
     }
 
+    public void addClient(Client client) {
+        addClient(client.getLogin(), client.getName(), client.getLastName(), client.getPassword(), client.getAge());
+    }
+
     public boolean addClient(String login, String name, String lastName, String password, int age) {
         if (login == null || name == null || lastName == null || password == null || age < 0) {
             return false;
         }
         return userRepository.addUser(new Client(name, lastName, login, password, age));
+    }
+
+    public void addEmployee(Employee employee) {
+        addEmployee(employee.getLogin(), employee.getName(), employee.getLastName(), employee.getPassword());
     }
 
     public boolean addEmployee(String login, String name, String lastName, String password) {
@@ -40,6 +48,11 @@ public class UserManager implements Serializable {
         }
         return userRepository.addUser(new Employee(name, lastName, login, password));
     }
+
+    public void addAdministrator(Administrator administrator) {
+        addAdministrator(administrator.getLogin(), administrator.getName(), administrator.getLastName(), administrator.getPassword());
+    }
+
 
     public boolean addAdministrator(String login, String name, String lastName, String password) {
         if (login == null || name == null || lastName == null || password == null) {

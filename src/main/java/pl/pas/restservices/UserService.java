@@ -1,6 +1,9 @@
 package pl.pas.restservices;
 
 import pl.pas.managers.UserManager;
+import pl.pas.model.user.Administrator;
+import pl.pas.model.user.Client;
+import pl.pas.model.user.Employee;
 import pl.pas.security.EntityIdentitySignerVerifier;
 import pl.pas.security.EntityToSign;
 
@@ -10,7 +13,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
-import java.lang.reflect.InvocationTargetException;
 
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -44,6 +46,33 @@ public class UserService {
         return Response.status(200).entity(userManager.getAll())
                 .build();
     }
+
+
+    //TODO to jest zle bo nie zwracamy bledu
+    @POST
+    @Path("/admin")
+    public Response createAdmin(Administrator admin) {
+
+        userManager.addAdministrator(admin);
+        return Response.status(201).build();
+    }
+
+    @POST
+    @Path("/superUser")
+    public Response createEmployee(Employee employee) {
+
+        userManager.addEmployee(employee);
+        return Response.status(201).build();
+    }
+
+    @POST
+    @Path("/client")
+    public Response createClient(Client client) {
+
+        userManager.addClient(client);
+        return Response.status(201).build();
+    }
+
 
 
 
