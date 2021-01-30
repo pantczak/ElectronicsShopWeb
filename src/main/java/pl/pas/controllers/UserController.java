@@ -99,19 +99,19 @@ public class UserController implements Serializable {
     }
 
     public String processNewClient() {
-        userManager.addClient(newClient.getLogin(), newClient.getName(), newClient.getLastName(), newClient.getAge());
+        userManager.addClient(newClient.getLogin(), newClient.getName(), newClient.getLastName(), newClient.getPassword(), newClient.getAge());
         newClient = new Client();
         return "menu";
     }
 
     public String processNewEmployee() {
-        userManager.addEmployee(newEmployee.getLogin(), newEmployee.getName(), newEmployee.getLastName());
+        userManager.addEmployee(newEmployee.getLogin(), newEmployee.getName(), newEmployee.getLastName(), newEmployee.getPassword());
         newEmployee = new Employee();
         return "menu";
     }
 
     public String processNewAdministrator() {
-        userManager.addAdministrator(newAdministrator.getLogin(), newAdministrator.getName(), newAdministrator.getLastName());
+        userManager.addAdministrator(newAdministrator.getLogin(), newAdministrator.getName(), newAdministrator.getLastName(), newAdministrator.getPassword());
         newAdministrator = new Administrator();
         return "menu";
     }
@@ -164,14 +164,14 @@ public class UserController implements Serializable {
 
     public String updateClient() {
         userManager.updateClient(currentClient, currentClient.getLogin(), currentClient.getName(),
-                currentClient.getLastName(), currentClient.getAge());
+                currentClient.getLastName(), currentClient.getPassword(), currentClient.getAge());
         return FacesContext.getCurrentInstance().getViewRoot().getViewId() + "?faces-redirect=true";
 
     }
 
     public String updateUser() {
         userManager.updateUser(currentUser, currentUser.getLogin(), currentUser.getName(),
-                currentUser.getLastName());
+                currentUser.getLastName(), currentUser.getPassword());
         return FacesContext.getCurrentInstance().getViewRoot().getViewId() + "?faces-redirect=true";
 
     }

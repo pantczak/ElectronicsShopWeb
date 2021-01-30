@@ -11,12 +11,14 @@ public abstract class User extends Entity {
     private String lastName;
     private boolean isActive = true;
     private String login;
+    private String password;
 
-    public User( String name, String lastName, String login) {
+    public User(String name, String lastName, String login, String password) {
         super();
         this.name = name;
         this.lastName = lastName;
         this.login = login;
+        this.password = password;
     }
 
     public User() {
@@ -25,6 +27,7 @@ public abstract class User extends Entity {
         isActive = true;
         lastName = "";
         name = "";
+        password = "";
     }
 
     @Override
@@ -62,6 +65,18 @@ public abstract class User extends Entity {
 
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    public String getRole() {
+        return "Client";
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

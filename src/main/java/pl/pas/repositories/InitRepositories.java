@@ -67,11 +67,11 @@ public class InitRepositories implements Serializable {
         deviceRepository.addDevice(laptop3);
         deviceRepository.addDevice(laptop4);
 
-        User user1 = new Administrator("Adam", "Nowak", "admin1");
-        User user2 = new Employee("Agnieszka", "Tylan", "aga123");
-        User user3 = new Client("Jan", "Kowalski", "123456", 44);
-        User user4 = new Client("Joanna", "Kulczyk", "joasia99", 21);
-        User user5 = new Client("Tomasz", "Tomczak", "tomtom", 18);
+        User user1 = new Administrator("Adam", "Nowak", "admin1", "pas123");
+        User user2 = new Employee("Agnieszka", "Tylan", "aga123", "pas123");
+        User user3 = new Client("Jan", "Kowalski", "123456", "pas123", 44);
+        User user4 = new Client("Joanna", "Kulczyk", "joasia99", "pas123", 21);
+        User user5 = new Client("Tomasz", "Tomczak", "tomtom", "pas123", 18);
         user5.setActive(false);
 
         userRepository.addUser(user1);

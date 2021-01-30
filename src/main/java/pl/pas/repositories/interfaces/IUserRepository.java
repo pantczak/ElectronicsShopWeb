@@ -20,4 +20,6 @@ public interface IUserRepository {
     List<User> getAllEmployees();
 
     List<User> getAllAdministrators();
+
+    List<User> getAll();
 }
