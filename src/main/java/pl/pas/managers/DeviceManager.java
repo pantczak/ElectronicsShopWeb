@@ -57,11 +57,19 @@ public class DeviceManager implements Serializable {
         return deviceRepository.getAllSmartphones();
     }
 
+    public boolean addLaptop(Laptop laptop) {
+        return addLaptop(laptop.getBrand(), laptop.getModel(), laptop.getWeightInGrams(), laptop.getMemoryInGb());
+    }
+
     public boolean addLaptop(String brand, String model, int weightInGrams, int memoryInGb) {
         if (brand == null || model == null || weightInGrams <= 0 || memoryInGb <= 0) {
             return false;
         }
         return deviceRepository.addDevice(new Laptop(brand, model, weightInGrams, memoryInGb));
+    }
+
+    public boolean addSmartphone(Smartphone smartphone) {
+        return addSmartphone(smartphone.getBrand(), smartphone.getModel(), smartphone.getWeightInGrams(), smartphone.getBatteryLifetime());
     }
 
     public boolean addSmartphone(String brand, String model, int weightInGrams, double batteryLifetime) {
@@ -74,20 +82,26 @@ public class DeviceManager implements Serializable {
     public boolean updateLaptop(Device old, String brand, String model, int weightInGrams, int memoryInGb) {
         if (old == null || brand == null || model == null || weightInGrams <= 0 || memoryInGb <= 0 ||
                 !deviceRepository.getAllDevices().contains(old) ||
-                !(old instanceof Laptop) || !old.isAvailable()){
+                !(old instanceof Laptop) || !old.isAvailable()) {
             return false;
         }
-        deviceRepository.updateDevice(old.getUuid(),new Laptop(brand, model, weightInGrams, memoryInGb));
+        deviceRepository.updateDevice(old.getUuid(), new Laptop(brand, model, weightInGrams, memoryInGb));
         return true;
     }
 
     public boolean updateSmartphone(Device old, String brand, String model, int weightInGrams, double batteryLifetime) {
         if (old == null || brand == null || model == null || weightInGrams <= 0 || batteryLifetime <= 0 ||
                 !deviceRepository.getAllDevices().contains(old) ||
-                !(old instanceof Laptop) || !old.isAvailable()){
+                !(old instanceof Laptop) || !old.isAvailable()) {
             return false;
         }
-        deviceRepository.updateDevice(old.getUuid(),new Smartphone(brand, model, weightInGrams, batteryLifetime));
+        deviceRepository.updateDevice(old.getUuid(), new Smartphone(brand, model, weightInGrams, batteryLifetime));
         return true;
     }
+
+    public List<Device> getAllDevices() {
+        return deviceRepository.getAllDevices();
+    }
+
+
 }
