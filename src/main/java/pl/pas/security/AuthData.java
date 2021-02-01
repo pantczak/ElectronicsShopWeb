@@ -1,13 +1,13 @@
 package pl.pas.security;
 
-public class LoginData {
+public class AuthData {
     private String login;
     private String password;
 
-    public LoginData() {
+    public AuthData() {
     }
 
-    public LoginData(String login, String password) {
+    public AuthData(String login, String password) {
         this.login = login;
         this.password = password;
     }

@@ -1,39 +1,29 @@
 package pl.pas.restservices;
 
 
-import com.nimbusds.jwt.SignedJWT;
-import pl.pas.managers.UserManager;
-import pl.pas.security.JWTAuthenticationMechanism;
 import pl.pas.security.JWTGeneratorVerifier;
-import pl.pas.security.LoginData;
-
+import pl.pas.security.AuthData;
 import javax.inject.Inject;
 import javax.security.enterprise.credential.Credential;
 import javax.security.enterprise.credential.Password;
 import javax.security.enterprise.credential.UsernamePasswordCredential;
 import javax.security.enterprise.identitystore.CredentialValidationResult;
 import javax.security.enterprise.identitystore.IdentityStoreHandler;
-import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.text.ParseException;
 
 @Produces(MediaType.TEXT_PLAIN)
 @Consumes(MediaType.APPLICATION_JSON)
 
 @Path("/auth")
-public class LogInService {
+public class AuthService {
     @Inject
     IdentityStoreHandler identityStoreHandler;
 
-    @Inject
-    private UserManager usersManager;
-
 
     @POST
-    public Response logIn(LoginData loginData) {
+    public Response logIn(AuthData loginData) {
         Credential credential = new UsernamePasswordCredential(loginData.getLogin(),
                 new Password(loginData.getPassword()));
         CredentialValidationResult result = identityStoreHandler.validate(credential);
