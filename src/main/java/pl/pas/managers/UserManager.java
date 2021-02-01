@@ -4,6 +4,7 @@ import pl.pas.model.user.Administrator;
 import pl.pas.model.user.Client;
 import pl.pas.model.user.Employee;
 import pl.pas.model.user.User;
+import pl.pas.repositories.UserRepository;
 import pl.pas.repositories.interfaces.IUserRepository;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -17,15 +18,11 @@ import java.util.UUID;
 @ApplicationScoped
 public class UserManager implements Serializable {
     @Inject
-    private IUserRepository userRepository;
+    private UserRepository userRepository;
 
     public UserManager() {
     }
 
-    public UserManager(IUserRepository userRepository) {
-
-        this.userRepository = userRepository;
-    }
 
     public boolean addClient(Client client) {
         return addClient(client.getLogin(), client.getName(), client.getLastName(), client.getPassword(), client.getAge());
@@ -88,25 +85,25 @@ public class UserManager implements Serializable {
         return userRepository.getAll();
     }
 
-    public boolean updateUser(User old, String login, String name, String lastName, String password) {
+    public boolean updateUser(User old, String login, String name, String lastName) {
         if (old == null || userRepository.getUser(old.getUuid()) == null
-                || login == null || name == null || password == null || lastName == null) {
+                || login == null || name == null || lastName == null) {
             return false;
         }
         if (old instanceof Employee) {
-            userRepository.updateUser(old.getUuid(), new Employee(name, lastName, login, password));
+            userRepository.updateUser(old.getUuid(), new Employee(name, lastName, login, old.getPassword()));
         } else if (old instanceof Administrator) {
-            userRepository.updateUser(old.getUuid(), new Administrator(name, lastName, login, password));
+            userRepository.updateUser(old.getUuid(), new Administrator(name, lastName, login, old.getPassword()));
         }
         return true;
     }
 
-    public boolean updateClient(User old, String login, String name, String lastName, String password, int age) {
+    public boolean updateClient(User old, String login, String name, String lastName, int age) {
         if (old == null || userRepository.getUser(old.getUuid()) == null
-                || login == null || name == null || lastName == null || password == null || age > 0 || !(old instanceof Client)) {
+                || login == null || name == null || lastName == null || age > 0 || !(old instanceof Client)) {
             return false;
         }
-        userRepository.updateUser(old.getUuid(), new Client(name, lastName, login, password, age));
+        userRepository.updateUser(old.getUuid(), new Client(name, lastName, login, old.getPassword(), age));
         return true;
     }
 

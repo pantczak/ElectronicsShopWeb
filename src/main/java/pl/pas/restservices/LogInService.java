@@ -43,7 +43,7 @@ public class LogInService {
                     .entity(JWTGeneratorVerifier.generateJWTString(result))
                     .build();
         }
-        return Response.status(401).build();
+        return Response.status(Response.Status.UNAUTHORIZED).build();
     }
 
     @GET
@@ -61,9 +61,9 @@ public class LogInService {
             }
         } catch (ParseException e) {
             e.printStackTrace();
-            return Response.status(401).build();
+            return Response.status(Response.Status.UNAUTHORIZED).build();
         }
-        return Response.status(401).build();
+        return Response.status(Response.Status.UNAUTHORIZED).build();
     }
 
 

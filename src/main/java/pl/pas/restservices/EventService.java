@@ -17,7 +17,7 @@ import java.util.UUID;
 
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-@Path("/event")
+@Path("/events")
 public class EventService {
 
     @Inject
@@ -34,34 +34,6 @@ public class EventService {
         return Response.status(Response.Status.OK)
                 .entity(eventManager.getEventsForClient(userManager.getUser(securityContext.getUserPrincipal().getName()).getUuid()))
                 .build();
-    }
-
-
-    @GET
-    @Path("{uuid}")
-    public Response getEvent(@PathParam("uuid") String uuid) {
-        return Response.status(Response.Status.OK)
-                .entity(eventManager.getEvent(UUID.fromString(uuid)))
-                .build();
-    }
-
-
-    @POST
-    @Path("/endevent/{uuid}")
-    public Response returnDevice(@PathParam("uuid") String uuid) {
-        if (eventManager.returnDevice(eventManager.getEvent(UUID.fromString(uuid)))) {
-            return Response.status(201).build();
-        }
-        return Response.status(422).build();
-    }
-
-    @DELETE
-    @Path("{uuid}")
-    public Response deleteEvent(@PathParam("uuid") String uuid) {
-        if (eventManager.deleteEvent(eventManager.getEvent(UUID.fromString(uuid)))) {
-            return Response.status(204).build();
-        }
-        return Response.status(422).build();
     }
 
     @POST

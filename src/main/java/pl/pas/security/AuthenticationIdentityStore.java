@@ -9,7 +9,7 @@ import javax.security.enterprise.credential.Credential;
 import javax.security.enterprise.credential.UsernamePasswordCredential;
 import javax.security.enterprise.identitystore.CredentialValidationResult;
 import javax.security.enterprise.identitystore.IdentityStore;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 
 @ApplicationScoped
@@ -28,7 +28,7 @@ public class AuthenticationIdentityStore implements IdentityStore {
                             usernamePasswordCredential.getPasswordAsString());
             if (user != null) {
                 return new CredentialValidationResult(user.getLogin(), new HashSet<>(
-                        Arrays.asList(user.getRole())));
+                        Collections.singletonList(user.getRole())));
             }
         }
         return CredentialValidationResult.INVALID_RESULT;

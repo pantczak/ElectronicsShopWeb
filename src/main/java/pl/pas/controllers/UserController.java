@@ -164,14 +164,14 @@ public class UserController implements Serializable {
 
     public String updateClient() {
         userManager.updateClient(currentClient, currentClient.getLogin(), currentClient.getName(),
-                currentClient.getLastName(), currentClient.getPassword(), currentClient.getAge());
+                currentClient.getLastName(), currentClient.getAge());
         return FacesContext.getCurrentInstance().getViewRoot().getViewId() + "?faces-redirect=true";
 
     }
 
     public String updateUser() {
         userManager.updateUser(currentUser, currentUser.getLogin(), currentUser.getName(),
-                currentUser.getLastName(), currentUser.getPassword());
+                currentUser.getLastName());
         return FacesContext.getCurrentInstance().getViewRoot().getViewId() + "?faces-redirect=true";
 
     }

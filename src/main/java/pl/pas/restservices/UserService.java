@@ -4,8 +4,6 @@ import pl.pas.managers.UserManager;
 import pl.pas.model.user.Administrator;
 import pl.pas.model.user.Client;
 import pl.pas.model.user.Employee;
-import pl.pas.security.EntityIdentitySignerVerifier;
-import pl.pas.security.EntityToSign;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -24,52 +22,38 @@ public class UserService {
     UserManager userManager;
 
     @GET
-    @Path("_self")
+    @Path("/me")
     public Response findSelf(@Context SecurityContext securityContext) {
         return Response.status(Response.Status.OK).entity(userManager.
                 getUser(securityContext.getUserPrincipal().getName())).build();
     }
 
     @GET
-    @Path("{uuid}")
+    @Path("/{uuid}")
     public Response getUser(@PathParam("uuid") String uuid) {
-        try {
-            return Response.status(Response.Status.OK).header("ETag", EntityIdentitySignerVerifier.calculateETag((EntityToSign) userManager.getUser(uuid)))
-                    .entity(userManager.getUser(uuid)).build();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return Response.status(Response.Status.BAD_REQUEST).build();
+        return Response.status(Response.Status.OK).entity(userManager.getUser(UUID.fromString(uuid))).build();
     }
 
     @GET
     public Response getAllUsers() {
-        return Response.status(200).entity(userManager.getAll())
+        return Response.status(Response.Status.OK).entity(userManager.getAll())
                 .build();
     }
 
 
     @PUT
     @Path("/admin/{uuid}")
-    public Response updateAdministrator(@PathParam("uuid") String uuid, @HeaderParam("If-Match") String header, Administrator admin) {
-        if (EntityIdentitySignerVerifier.verifyEntityIntegrity(header, (EntityToSign) admin)) {
-            if (userManager.updateUser(userManager.getUser(UUID.fromString(uuid)), admin.getLogin(), admin.getName(), admin.getLastName(), admin.getPassword())) {
-                return Response.status(Response.Status.OK).build();
-            }
-            return Response.status(422).build();
-        } else {
-            return Response.status(406).build();
+    public Response updateAdministrator(@PathParam("uuid") String uuid, Administrator admin) {
+        if (userManager.updateUser(userManager.getUser(UUID.fromString(uuid)), admin.getLogin(), admin.getName(), admin.getLastName())) {
+            return Response.status(Response.Status.OK).build();
         }
-
+        return Response.status(422).build();
     }
 
     @PUT
     @Path("/employee/{uuid}")
-    public Response updateEmployee(@PathParam("uuid") String uuid, @HeaderParam("If-Match") String header, Employee employee) {
-        if (!EntityIdentitySignerVerifier.verifyEntityIntegrity(header, (EntityToSign) employee)) {
-            return Response.status(406).build();
-        }
-        if (userManager.updateUser(userManager.getUser(UUID.fromString(uuid)), employee.getLogin(), employee.getName(), employee.getLastName(), employee.getPassword())) {
+    public Response updateEmployee(@PathParam("uuid") String uuid, Employee employee) {
+        if (userManager.updateUser(userManager.getUser(UUID.fromString(uuid)), employee.getLogin(), employee.getName(), employee.getLastName())) {
             return Response.status(Response.Status.OK).build();
         }
         return Response.status(422).build();
@@ -78,11 +62,8 @@ public class UserService {
 
     @PUT
     @Path("/client/{uuid}")
-    public Response updateClient(@PathParam("uuid") String uuid, @HeaderParam("If-Match") String header, Client client) {
-        if (!EntityIdentitySignerVerifier.verifyEntityIntegrity(header, (EntityToSign) client)) {
-            return Response.status(406).build();
-        }
-        if (userManager.updateClient(userManager.getUser(UUID.fromString(uuid)), client.getLogin(), client.getName(), client.getLastName(), client.getPassword(), client.getAge())) {
+    public Response updateClient(@PathParam("uuid") String uuid, Client client) {
+        if (userManager.updateClient(userManager.getUser(UUID.fromString(uuid)), client.getLogin(), client.getName(), client.getLastName(), client.getAge())) {
             return Response.status(Response.Status.OK).build();
         }
         return Response.status(422).build();
