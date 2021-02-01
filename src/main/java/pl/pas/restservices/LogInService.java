@@ -46,26 +46,6 @@ public class LogInService {
         return Response.status(Response.Status.UNAUTHORIZED).build();
     }
 
-    @GET
-    @Path("/update")
-    public Response updateToken(@Context HttpServletRequest httpServletRequest) {
-        String authHeader = httpServletRequest.getHeader(JWTAuthenticationMechanism.AUTHORIZATION);
-        String tokenToUpdate = authHeader.substring(JWTAuthenticationMechanism.BEARER.length());
-        try {
-            String login = SignedJWT.parse(tokenToUpdate).getJWTClaimsSet().getSubject();
-            if (usersManager.isUserActive(login)) {
-                return Response.status(202)
-                        .type("application/jwt")
-                        .entity(JWTGeneratorVerifier.updateJWTString(tokenToUpdate))
-                        .build();
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return Response.status(Response.Status.UNAUTHORIZED).build();
-        }
-        return Response.status(Response.Status.UNAUTHORIZED).build();
-    }
-
 
 
 }

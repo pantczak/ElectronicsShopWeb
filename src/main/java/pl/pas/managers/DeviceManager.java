@@ -92,7 +92,7 @@ public class DeviceManager implements Serializable {
     public boolean updateSmartphone(Device old, String brand, String model, int weightInGrams, double batteryLifetime) {
         if (old == null || brand == null || model == null || weightInGrams <= 0 || batteryLifetime <= 0 ||
                 !deviceRepository.getAllDevices().contains(old) ||
-                !(old instanceof Laptop) || !old.isAvailable()) {
+                !(old instanceof Smartphone) || !old.isAvailable()) {
             return false;
         }
         deviceRepository.updateDevice(old.getUuid(), new Smartphone(brand, model, weightInGrams, batteryLifetime));

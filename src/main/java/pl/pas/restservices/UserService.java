@@ -4,6 +4,7 @@ import pl.pas.managers.UserManager;
 import pl.pas.model.user.Administrator;
 import pl.pas.model.user.Client;
 import pl.pas.model.user.Employee;
+import pl.pas.model.user.UserWrapperConverter;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -24,36 +25,36 @@ public class UserService {
     @GET
     @Path("/me")
     public Response findSelf(@Context SecurityContext securityContext) {
-        return Response.status(Response.Status.OK).entity(userManager.
-                getUser(securityContext.getUserPrincipal().getName())).build();
+        return Response.status(Response.Status.OK).entity(UserWrapperConverter.wrap(userManager.
+                getUser(securityContext.getUserPrincipal().getName()))).build();
     }
 
     @GET
     @Path("/{uuid}")
     public Response getUser(@PathParam("uuid") String uuid) {
-        return Response.status(Response.Status.OK).entity(userManager.getUser(UUID.fromString(uuid))).build();
+        return Response.status(Response.Status.OK).entity(UserWrapperConverter.wrap(userManager.getUser(UUID.fromString(uuid)))).build();
     }
 
     @GET
     public Response getAllUsers() {
-        return Response.status(Response.Status.OK).entity(userManager.getAll())
+        return Response.status(Response.Status.OK).entity(UserWrapperConverter.listWrapper(userManager.getAll()))
                 .build();
     }
 
 
     @PUT
-    @Path("/admin/{uuid}")
-    public Response updateAdministrator(@PathParam("uuid") String uuid, Administrator admin) {
-        if (userManager.updateUser(userManager.getUser(UUID.fromString(uuid)), admin.getLogin(), admin.getName(), admin.getLastName())) {
+    @Path("/admin")
+    public Response updateAdministrator(Administrator admin) {
+        if (userManager.updateUser(userManager.getUser((admin.getUuid())), admin.getLogin(), admin.getName(), admin.getLastName())) {
             return Response.status(Response.Status.OK).build();
         }
         return Response.status(422).build();
     }
 
     @PUT
-    @Path("/employee/{uuid}")
-    public Response updateEmployee(@PathParam("uuid") String uuid, Employee employee) {
-        if (userManager.updateUser(userManager.getUser(UUID.fromString(uuid)), employee.getLogin(), employee.getName(), employee.getLastName())) {
+    @Path("/employee")
+    public Response updateEmployee(Employee employee) {
+        if (userManager.updateUser(userManager.getUser((employee.getUuid())), employee.getLogin(), employee.getName(), employee.getLastName())) {
             return Response.status(Response.Status.OK).build();
         }
         return Response.status(422).build();
@@ -61,9 +62,9 @@ public class UserService {
     }
 
     @PUT
-    @Path("/client/{uuid}")
-    public Response updateClient(@PathParam("uuid") String uuid, Client client) {
-        if (userManager.updateClient(userManager.getUser(UUID.fromString(uuid)), client.getLogin(), client.getName(), client.getLastName(), client.getAge())) {
+    @Path("/client")
+    public Response updateClient(Client client) {
+        if (userManager.updateClient(userManager.getUser((client.getUuid())), client.getLogin(), client.getName(), client.getLastName(), client.getAge())) {
             return Response.status(Response.Status.OK).build();
         }
         return Response.status(422).build();
@@ -80,7 +81,7 @@ public class UserService {
     }
 
     @POST
-    @Path("/superUser")
+    @Path("/employee")
     public Response createEmployee(Employee employee) {
         if (userManager.addEmployee(employee)) {
             return Response.status(Response.Status.CREATED).build();
@@ -97,6 +98,4 @@ public class UserService {
         }
         return Response.status(422).build();
     }
-
-
 }

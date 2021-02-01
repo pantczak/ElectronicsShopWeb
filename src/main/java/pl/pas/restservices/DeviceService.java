@@ -44,10 +44,9 @@ public class DeviceService {
     }
 
     @PUT
-    @Path("/smartphone/{uuid}")
-    public Response updateSmartphone(@PathParam("uuid") String uuid, Smartphone smartphone
-    ) {
-        if (deviceManager.updateSmartphone(deviceManager.getDevice(UUID.fromString(uuid)), smartphone.getBrand(), smartphone.getModel(), smartphone.getWeightInGrams(), smartphone.getBatteryLifetime())) {
+    @Path("/smartphone")
+    public Response updateSmartphone(Smartphone smartphone) {
+        if (deviceManager.updateSmartphone(deviceManager.getDevice((smartphone.getUuid())), smartphone.getBrand(), smartphone.getModel(), smartphone.getWeightInGrams(), smartphone.getBatteryLifetime())) {
             return Response.status(200).build();
         }
         return Response.status(422).build();

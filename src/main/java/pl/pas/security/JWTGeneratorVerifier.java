@@ -34,28 +34,6 @@ public class JWTGeneratorVerifier {
         }
     }
 
-    public static String updateJWTString(String tokenToUpdate) {
-        try {
-            final JWSSigner signer = new MACSigner(SECRET);
-            SignedJWT oldToken = SignedJWT.parse(tokenToUpdate);
-            JWTClaimsSet oldClaimSet = oldToken.getJWTClaimsSet();
-
-            final JWTClaimsSet newClaimsSet = new JWTClaimsSet.Builder()
-                    .subject(oldClaimSet.getSubject())
-                    .claim("role", oldClaimSet.getClaim("role"))
-                    .expirationTime(new Date(new Date().getTime() + JWT_EXPIRE_TIMEOUT))
-                    .build();
-
-            final SignedJWT newSignedJWT =
-                    new SignedJWT(new JWSHeader(JWSAlgorithm.HS256), newClaimsSet);
-            newSignedJWT.sign(signer);
-            return newSignedJWT.serialize();
-        } catch (ParseException | JOSEException e) {
-            e.printStackTrace();
-            return "JWT error";
-        }
-    }
-
     public static boolean validateJWT(String tokenToValidate) {
         try {
             JWSObject jwsObject = JWSObject.parse(tokenToValidate);

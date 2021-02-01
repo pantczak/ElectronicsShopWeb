@@ -13,8 +13,7 @@ public class Client extends User {
     }
 
     public Client() {
-        super();
-        age = 0;
+
     }
 
     public int getAge() {
