@@ -32,7 +32,7 @@ public class JWTAuthenticationMechanism implements HttpAuthenticationMechanism {
             }
 
             String tokenToValidate = authHeader.substring(BEARER.length());
-            if (JWTGeneratorVerifier.validateJWT(tokenToValidate)) {
+            if (JWTCreatorVerifier.validateJWT(tokenToValidate)) {
                 try {
                     SignedJWT jwtToken = SignedJWT.parse(tokenToValidate);
                     String login = jwtToken.getJWTClaimsSet().getSubject();

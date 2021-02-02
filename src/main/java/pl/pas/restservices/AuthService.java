@@ -1,7 +1,7 @@
 package pl.pas.restservices;
 
 
-import pl.pas.security.JWTGeneratorVerifier;
+import pl.pas.security.JWTCreatorVerifier;
 import pl.pas.security.AuthData;
 import javax.inject.Inject;
 import javax.security.enterprise.credential.Credential;
@@ -30,7 +30,7 @@ public class AuthService {
         if (result.getStatus() == CredentialValidationResult.Status.VALID) {
             return Response.status(202)
                     .type("application/jwt")
-                    .entity(JWTGeneratorVerifier.generateJWTString(result))
+                    .entity(JWTCreatorVerifier.createJWTString(result))
                     .build();
         }
         return Response.status(Response.Status.UNAUTHORIZED).build();

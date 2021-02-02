@@ -10,12 +10,12 @@ import javax.security.enterprise.identitystore.CredentialValidationResult;
 import java.text.ParseException;
 import java.util.Date;
 
-public class JWTGeneratorVerifier {
+public class JWTCreatorVerifier {
 
     private static final String SECRET = "09SEVheeEsOTYLDZAJylVmlHb4XadBtgABGKZB5wmKVexgWU";
     private static final long JWT_EXPIRE_TIMEOUT = 15 * 60 * 1000;
 
-    public static String generateJWTString(CredentialValidationResult result) {
+    public static String createJWTString(CredentialValidationResult result) {
         try {
             final JWSSigner signer = new MACSigner(SECRET);
 
