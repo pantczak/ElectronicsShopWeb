@@ -97,7 +97,6 @@
         <web-resource-collection>
             <web-resource-name>Common</web-resource-name>
             <url-pattern>/rest/users/me</url-pattern>
-            <url-pattern>/rest/auth/update</url-pattern>
             <http-method>GET</http-method>
         </web-resource-collection>
         <auth-constraint>

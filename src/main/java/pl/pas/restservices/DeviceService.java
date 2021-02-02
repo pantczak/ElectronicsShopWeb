@@ -33,10 +33,9 @@ public class DeviceService {
     }
 
     @PUT
-    @Path("/laptop/{uuid}")
-    public Response updateLaptop(@PathParam("uuid") String uuid,
-                                 Laptop laptop) {
-        if (deviceManager.updateLaptop(deviceManager.getDevice(UUID.fromString(uuid)), laptop.getBrand(), laptop.getModel(), laptop.getWeightInGrams(), laptop.getMemoryInGb())) {
+    @Path("/laptop")
+    public Response updateLaptop(Laptop laptop) {
+        if (deviceManager.updateLaptop(deviceManager.getDevice(laptop.getUuid()), laptop.getBrand(), laptop.getModel(), laptop.getWeightInGrams(), laptop.getMemoryInGb())) {
             return Response.status(200).build();
         }
         return Response.status(422).build();
