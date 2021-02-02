@@ -123,7 +123,7 @@ public class UserManager implements Serializable {
         return true;
     }
 
-    public User findByLoginPasswordActive(String login, String passwordAsString) {
+    public User getUserByLoginPassword(String login, String passwordAsString) {
         User user = null;
         try {
             User tmp = getUser(login);

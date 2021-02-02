@@ -24,7 +24,7 @@ public class AuthenticationIdentityStore implements IdentityStore {
             UsernamePasswordCredential usernamePasswordCredential =
                     (UsernamePasswordCredential) credential;
             User user = usersManager
-                    .findByLoginPasswordActive(usernamePasswordCredential.getCaller(),
+                    .getUserByLoginPassword(usernamePasswordCredential.getCaller(),
                             usernamePasswordCredential.getPasswordAsString());
             if (user != null) {
                 return new CredentialValidationResult(user.getLogin(), new HashSet<>(
