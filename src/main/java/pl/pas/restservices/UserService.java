@@ -24,7 +24,7 @@ public class UserService {
 
     @GET
     @Path("/me")
-    public Response findSelf(@Context SecurityContext securityContext) {
+    public Response myInfo(@Context SecurityContext securityContext) {
         return Response.status(Response.Status.OK).entity(UserWrapperConverter.wrap(userManager.
                 getUser(securityContext.getUserPrincipal().getName()))).build();
     }

@@ -73,7 +73,7 @@ public class DeviceService {
 
     @DELETE
     @Path("{uuid}")
-    public Response deleteBabysitter(@PathParam("uuid") String uuid) {
+    public Response deleteDevice(@PathParam("uuid") String uuid) {
         if (deviceManager.deleteDevice(UUID.fromString(uuid))) {
             return Response.status(204).build();
         }
