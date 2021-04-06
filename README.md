@@ -18,7 +18,7 @@ Data model is a simplified version of  [OOP-final-project](github.com/pantczak/O
 ## Important info about branches
 * ```main``` branch contains basic MVC app with no security ( it was used to learn first 6 concepts)
 * ```security_and_auth``` branch focuses on declarative security (i.a. file relam on payara server, security constraints, security mapping)
-* ```rest``` branch focuses on programmatic securoty (Soteria JSR-375) and REST API
+* ```rest``` branch focuses on programmatic security (Soteria JSR-375) and REST API
 
 ## Used technologies
 * Java 11
