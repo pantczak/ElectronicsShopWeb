@@ -22,7 +22,7 @@ Data model is a simplified version of  [OOP-final-project](github.com/pantczak/O
 
 ## Used technologies
 * Java 11
-* Java/JakartaEE 8
+* JavaEE/JakartaEE 8
 * Payara server
 
 ## Other info
